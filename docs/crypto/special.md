@@ -1,20 +1,19 @@
-# 趣味编码与隐写
+# 趣味编码与隐写工具
 
 CTF中的趣味编码和特殊隐写技巧。
 
-## 零宽隐写
+## 在线工具
 
 ### 零宽字符隐写
-**在线工具**:
-- [330k Unicode Steganography](https://330k.github.io/misc_tools/unicode_steganography.html)
-- [Yuanfux Zero-Width](https://yuanfux.github.io/zero-width-web/)
-- [郭飞文本水印](https://www.guofei.site/pictures_for_blog/app/text_watermark/v1.html)
-- [MZY零宽1](https://www.mzy0.com/ctftools/zerowidth1/)
-- [MZY零宽2](https://www.mzy0.com/ctftools/zerowidth2/)
-- [QQ秀资零宽隐写](https://www.qqxiuzi.cn/bianma/yincangjiami.php)
 
-**GitHub项目**:
-- [yuanfux/zero-width-lib](https://github.com/yuanfux/zero-width-lib)
+| 工具名称 | 链接 | 特点 |
+|---------|------|------|
+| 330k Unicode | [https://330k.github.io/misc_tools/unicode_steganography.html](https://330k.github.io/misc_tools/unicode_steganography.html) | Unicode隐写 |
+| Yuanfux Zero-Width | [https://yuanfux.github.io/zero-width-web/](https://yuanfux.github.io/zero-width-web/) | 零宽隐写 |
+| 郭飞文本水印 | [https://www.guofei.site/pictures_for_blog/app/text_watermark/v1.html](https://www.guofei.site/pictures_for_blog/app/text_watermark/v1.html) | 文本水印 |
+| MZY零宽1 | [https://www.mzy0.com/ctftools/zerowidth1/](https://www.mzy0.com/ctftools/zerowidth1/) | 零宽工具1 |
+| MZY零宽2 | [https://www.mzy0.com/ctftools/zerowidth2/](https://www.mzy0.com/ctftools/zerowidth2/) | 零宽工具2 |
+| QQ秀资 | [https://www.qqxiuzi.cn/bianma/yincangjiami.php](https://www.qqxiuzi.cn/bianma/yincangjiami.php) | 隐藏加密 |
 
 **原理**: 使用零宽字符（不可见字符）隐藏信息
 
@@ -24,255 +23,580 @@ CTF中的趣味编码和特殊隐写技巧。
 - `U+200D` - 零宽连接符 (ZERO WIDTH JOINER)
 - `U+FEFF` - 零宽非断空格 (ZERO WIDTH NO-BREAK SPACE)
 
-**检测方法**:
-```python
-text = "看起来正常的文本"
-# 检查是否包含零宽字符
-zero_width = ['​', '‌', '‍', '﻿']
-for char in text:
-    if char in zero_width:
-        print(f"发现零宽字符: U+{ord(char):04X}")
-```
+### 编程语言编码
 
-## 编程语言编码
+#### Brainfuck & Ook!
 
-### Brainfuck & Ook!
-**在线工具**:
-- [C5R Brainfuck](https://c5r.app/tools/brain-fuck)
-- [Hi编码](http://www.hiencode.com/brain.html)
-- [CTFever](https://ctfever.uniiem.com/tools/brain-fuck)
-- [BugKu](https://ctf.bugku.com/tool/brainfuck)
-- [Tool BugKu](https://tool.bugku.com/brainfuck/)
-- [CacheSleuth](https://www.cachesleuth.com/bfook.html)
-- [SplitBrain Ook!](https://www.splitbrain.org/services/ook)
+| 工具名称 | 链接 | 支持语言 |
+|---------|------|----------|
+| C5R | [https://c5r.app/tools/brain-fuck](https://c5r.app/tools/brain-fuck) | Brainfuck |
+| Hi编码 | [http://www.hiencode.com/brain.html](http://www.hiencode.com/brain.html) | Brainfuck |
+| CTFever | [https://ctfever.uniiem.com/tools/brain-fuck](https://ctfever.uniiem.com/tools/brain-fuck) | Brainfuck |
+| BugKu | [https://ctf.bugku.com/tool/brainfuck](https://ctf.bugku.com/tool/brainfuck) | Brainfuck |
+| CacheSleuth | [https://www.cachesleuth.com/bfook.html](https://www.cachesleuth.com/bfook.html) | Brainfuck/Ook! |
+| SplitBrain | [https://www.splitbrain.org/services/ook](https://www.splitbrain.org/services/ook) | Ook! |
 
-**Brainfuck颜文字**:
-- [Esolangs Wiki](https://esolangs.org/wiki/(_%CD%A1%C2%B0_%CD%9C%CA%96_%CD%A1%C2%B0)fuck)
-
-**原理**: 极简编程语言，只用8个字符
-
-**Brainfuck字符集**: `+ - > < [ ] . ,`
-
+**Brainfuck字符集**: `+ - > < [ ] . ,`  
 **Ook!字符集**: `Ook. Ook? Ook!`
 
-### JSFuck
-**在线工具**:
-- [Hi编码](http://www.hiencode.com/jsfuck.html)
-- [CoderTab](http://codertab.com/JsUnFuck)
-- [利民吧](http://www.liminba.com/tool/jsfuckdecode/)
-- [C5R](https://c5r.app/tools/jsfuck)
-- [CTFever](https://ctfever.uniiem.com/tools/jsfuck)
-- [BugKu](https://www.bugku.com/tools/jsfuck/)
+#### JSFuck
 
-**原理**: 只用6个字符编写JavaScript代码
+| 工具名称 | 链接 | 特点 |
+|---------|------|------|
+| Hi编码 | [http://www.hiencode.com/jsfuck.html](http://www.hiencode.com/jsfuck.html) | 加解密 |
+| CoderTab | [http://codertab.com/JsUnFuck](http://codertab.com/JsUnFuck) | 解密 |
+| 利民吧 | [http://www.liminba.com/tool/jsfuckdecode/](http://www.liminba.com/tool/jsfuckdecode/) | 解密 |
+| C5R | [https://c5r.app/tools/jsfuck](https://c5r.app/tools/jsfuck) | 全功能 |
+| CTFever | [https://ctfever.uniiem.com/tools/jsfuck](https://ctfever.uniiem.com/tools/jsfuck) | 现代界面 |
+| BugKu | [https://www.bugku.com/tools/jsfuck/](https://www.bugku.com/tools/jsfuck/) | CTF专用 |
 
 **字符集**: `[ ] ( ) + !`
 
-### JJencode
-**在线工具**:
-- [Hi编码](http://www.hiencode.com/jjencode.html)
+#### 其他JS编码
 
-**原理**: JavaScript颜文字编码
+| 编码类型 | 在线工具 | 特点 |
+|---------|---------|------|
+| JJencode | [Hi编码](http://www.hiencode.com/jjencode.html) | JS颜文字 |
+| AAencode | [Hi编码](http://www.hiencode.com/aaencode.html) | JS颜文字 |
+| AAencode | [UTF-8.jp](http://utf-8.jp/public/aaencode.html) | 官方工具 |
+| PPencode | [Hi编码](http://www.hiencode.com/ppencode.html) | Perl颜文字 |
 
-### AAencode
-**在线工具**:
-- [UTF-8.jp](http://utf-8.jp/public/aaencode.html)
-- [Atoolbox](http://www.atoolbox.net/Tool.php?Id=703)
-- [Hi编码](http://www.hiencode.com/aaencode.html)
+#### 其他编程语言
 
-**原理**: JavaScript颜文字编码
+| 语言 | 在线工具 | 说明 |
+|------|---------|------|
+| Malbolge | [Malbolge Tools](https://zb3.me/malbolge-tools/) | 最难的编程语言 |
+| Logo | [JSLogo](https://www.calormen.com/jslogo/) | 海龟绘图 |
 
-### PPencode
-**在线工具**:
-- [Hi编码](http://www.hiencode.com/ppencode.html)
+### SoJSON混淆
 
-**原理**: Perl语言的颜文字编码
+| 版本 | 在线工具 | 说明 |
+|------|---------|------|
+| SoJSON v4 | [BugKu](https://ctf.bugku.com/tool/sojson4) | v4解密 |
+| SoJSON v5 | [BugKu](https://ctf.bugku.com/tool/sojson5) | v5解密(jsjiami.com.v5) |
 
-### Malbolge
-**在线工具**:
-- [Malbolge Tools](https://zb3.me/malbolge-tools/)
+### 特殊编码
 
-**原理**: 最难的编程语言之一
+| 编码类型 | 在线工具 | 说明 |
+|---------|---------|------|
+| Tupper公式 | [Tupper's Formula](https://tuppers-formula.ovh/) | 数学自指公式 |
+| DNA序列 | [DNA Converter](https://skaminsky115.github.io/nac/DNA-mRNA-Protein_Converter.html) | ATCG编码 |
+| BubbleBabble | [Hi编码](http://www.hiencode.com/bubble.html) | 二进制转可读 |
+| Handycode | [Hi编码](http://www.hiencode.com/handycode.html) | 手机键盘编码 |
+| Emoji-AES | [Emoji-AES](https://aghorler.github.io/emoji-aes/) | Emoji密钥加密 |
 
-### Logo编程
-**在线工具**:
-- [JSLogo](https://www.calormen.com/jslogo/)
+### Cisco密码
 
-**原理**: 海龟绘图语言
+| 工具名称 | 链接 | 功能 |
+|---------|------|------|
+| IFM Cracker | [https://www.ifm.net.nz/cookbooks/passwordcracker.html](https://www.ifm.net.nz/cookbooks/passwordcracker.html) | Cisco密码解密 |
+| Type7工具 | [Atoolbox](http://www.atoolbox.net/Tool.php?Id=992) | Type 7加解密 |
 
-## 特殊编码
+### 其他工具
 
-### Tupper自指公式
-**在线工具**:
-- [Tupper's Formula](https://tuppers-formula.ovh/)
+| 工具名称 | 链接 | 功能 |
+|---------|------|------|
+| Enigma密码机 | [Atoolbox](http://www.atoolbox.net/Tool.php?Id=993) | 模拟Enigma |
+| 图像编码 | [http://www.fzwjscj.xyz/index.php/archives/23/](http://www.fzwjscj.xyz/index.php/archives/23/) | 图片编码 |
 
-**原理**: 数学公式可以绘制自己
+## 离线工具
 
-### DNA序列编码
-**在线工具**:
-- [DNA-mRNA-Protein Converter](https://skaminsky115.github.io/nac/DNA-mRNA-Protein_Converter.html)
+### Python零宽字符处理
 
-**原理**: 使用DNA碱基对(ATCG)编码
+**检测零宽字符**:
+```python
+def detect_zero_width(text):
+    """检测文本中的零宽字符"""
+    zero_width_chars = {
+        '​': 'ZERO WIDTH SPACE',
+        '‌': 'ZERO WIDTH NON-JOINER',
+        '‍': 'ZERO WIDTH JOINER',
+        '﻿': 'ZERO WIDTH NO-BREAK SPACE',
+        '⁠': 'WORD JOINER',
+        '᠎': 'MONGOLIAN VOWEL SEPARATOR'
+    }
+    
+    found = []
+    for i, char in enumerate(text):
+        if char in zero_width_chars:
+            found.append({
+                'position': i,
+                'char': char,
+                'unicode': f'U+{ord(char):04X}',
+                'name': zero_width_chars[char]
+            })
+    
+    return found
 
-**对应关系**:
+# 使用
+text = "正常文本​​隐藏内容"  # 包含零宽字符
+results = detect_zero_width(text)
+for r in results:
+    print(f"位置 {r['position']}: {r['unicode']} ({r['name']})")
 ```
-A - Adenine (腺嘌呤)
-T - Thymine (胸腺嘧啶)
-C - Cytosine (胞嘧啶)
-G - Guanine (鸟嘌呤)
+
+**零宽字符编码/解码**:
+```python
+def encode_zero_width(message):
+    """使用零宽字符编码二进制消息"""
+    binary = ''.join(format(ord(c), '08b') for c in message)
+    
+    # 用零宽字符表示0和1
+    zero = '​'  # 0
+    one = '‌'   # 1
+    
+    encoded = ''.join(zero if bit == '0' else one for bit in binary)
+    return encoded
+
+def decode_zero_width(encoded):
+    """解码零宽字符消息"""
+    zero = '​'
+    one = '‌'
+    
+    # 转为二进制
+    binary = ''.join('0' if c == zero else '1' for c in encoded if c in [zero, one])
+    
+    # 二进制转文本
+    message = ''
+    for i in range(0, len(binary), 8):
+        byte = binary[i:i+8]
+        if len(byte) == 8:
+            message += chr(int(byte, 2))
+    
+    return message
+
+# 使用
+secret = "flag{test}"
+encoded = encode_zero_width(secret)
+print(f"编码长度: {len(encoded)} 字符")
+
+# 隐藏在正常文本中
+cover_text = "这是正常文本"
+hidden_text = cover_text + encoded
+print(f"表面文本: {cover_text}")
+print(f"实际长度: {len(hidden_text)}")
+
+# 解码
+decoded = decode_zero_width(hidden_text)
+print(f"解码: {decoded}")
 ```
 
-### 图像编码
-**链接**: [http://www.fzwjscj.xyz/index.php/archives/23/](http://www.fzwjscj.xyz/index.php/archives/23/)
+### SNOW隐写工具
 
-**功能**: 使用图片元素编码信息
+**下载链接**:
+```
+https://darkside.com.au/snow/snow-20130616.tar.gz
+```
 
-### BubbleBabble
-**在线工具**:
-- [Hi编码](http://www.hiencode.com/bubble.html)
-
-**原理**: 二进制数据转可读字符串
-
-### Handycode
-**在线工具**:
-- [Hi编码](http://www.hiencode.com/handycode.html)
-
-**原理**: 手机键盘编码
-
-## SoJSON混淆
-
-### SoJSON v4
-**在线工具**:
-- [BugKu](https://ctf.bugku.com/tool/sojson4)
-
-**功能**: SoJSON v4混淆解密
-
-### SoJSON v5 (jsjiami.com.v5)
-**在线工具**:
-- [BugKu](https://ctf.bugku.com/tool/sojson5)
-
-**功能**: SoJSON v5混淆解密
-
-## Emoji编码
-
-### Emoji-AES
-**在线工具**:
-- [Emoji-AES](https://aghorler.github.io/emoji-aes/)
-
-**GitHub项目**:
-- [aghorler/emoji-aes](https://github.com/aghorler/emoji-aes)
-- [Mumuzi7179/emoji_aes_burst](https://github.com/Mumuzi7179/emoji_aes_burst) - 爆破工具
-
-**原理**: 使用Emoji表情作为AES密钥
-
-## 文本隐写
-
-### 文本盲水印
-**GitHub项目**:
-- [guofei9987/text_blind_watermark](https://github.com/guofei9987/text_blind_watermark)
-
-**功能**: 在文本中嵌入不可见水印
-
-### SNOW隐写
-**链接**: [https://darkside.com.au/snow](https://darkside.com.au/snow)
-
-**功能**: 在文本文件空白处隐藏信息
-
-**原理**: 使用空格和制表符编码
-
-**用法**:
+**安装**:
 ```bash
-# 隐藏
-snow -C -m "secret" -p "password" input.txt output.txt
+# Linux/macOS
+wget https://darkside.com.au/snow/snow-20130616.tar.gz
+tar -xzf snow-20130616.tar.gz
+cd snow-20130616
+make
 
-# 提取
-snow -C -p "password" output.txt
+# 或直接从包管理器安装
+apt install snow  # Debian/Ubuntu
+brew install snow  # macOS
 ```
 
-### 空白字符隐写
-**原理**: 使用不同的空白字符编码
+**基本使用**:
+```bash
+# 隐藏信息
+snow -C -m "secret message" -p "password" input.txt output.txt
 
-**工具**: 使用零宽字符工具
+# 提取信息
+snow -C -p "password" output.txt
 
-## 程序代码隐写
+# 不使用压缩
+snow -m "secret" input.txt output.txt
 
-### Ideone
-**链接**: [https://ideone.com/](https://ideone.com/)
+# 从文件读取秘密消息
+snow -C -f secret.txt -p "password" input.txt output.txt
 
-**功能**: 在线代码运行，支持空白隐藏
+# 统计信息
+snow -S -p "password" output.txt
+```
 
-## Cisco密码
+**Python实现（简化版）**:
+```python
+def snow_encode(cover_text, message):
+    """简化的SNOW编码：使用空格和制表符"""
+    # 转为二进制
+    binary = ''.join(format(ord(c), '08b') for c in message)
+    binary += '00000000'  # 结束标记
+    
+    lines = cover_text.split('\n')
+    encoded_lines = []
+    bit_index = 0
+    
+    for line in lines:
+        if bit_index >= len(binary):
+            encoded_lines.append(line)
+            continue
+        
+        # 在行尾添加空格/制表符（0=空格，1=制表符）
+        suffix = ''
+        for _ in range(min(8, len(binary) - bit_index)):
+            if binary[bit_index] == '0':
+                suffix += ' '
+            else:
+                suffix += '\t'
+            bit_index += 1
+        
+        encoded_lines.append(line + suffix)
+    
+    return '\n'.join(encoded_lines)
 
-### Cisco密码解密
-**在线工具**:
-- [IFM Password Cracker](https://www.ifm.net.nz/cookbooks/passwordcracker.html)
+def snow_decode(text):
+    """解码SNOW隐写"""
+    lines = text.split('\n')
+    binary = ''
+    
+    for line in lines:
+        # 提取行尾的空白字符
+        trailing = len(line) - len(line.rstrip(' \t'))
+        if trailing > 0:
+            for char in line[-trailing:]:
+                binary += '0' if char == ' ' else '1'
+    
+    # 二进制转文本
+    message = ''
+    for i in range(0, len(binary), 8):
+        byte = binary[i:i+8]
+        if len(byte) == 8:
+            char_code = int(byte, 2)
+            if char_code == 0:  # 结束标记
+                break
+            message += chr(char_code)
+    
+    return message
+```
 
-**功能**: 解密Cisco Type 7密码
+### Brainfuck解释器
 
-### Type7密码
-**在线工具**:
-- [Atoolbox](http://www.atoolbox.net/Tool.php?Id=992)
+**Python实现**:
+```python
+def brainfuck_interpret(code, input_data=''):
+    """Brainfuck解释器"""
+    code = ''.join(c for c in code if c in '><+-.,[]')
+    
+    memory = [0] * 30000
+    pointer = 0
+    code_pointer = 0
+    output = []
+    input_pointer = 0
+    
+    # 预处理循环跳转表
+    brackets = {}
+    stack = []
+    for i, c in enumerate(code):
+        if c == '[':
+            stack.append(i)
+        elif c == ']':
+            if stack:
+                start = stack.pop()
+                brackets[start] = i
+                brackets[i] = start
+    
+    while code_pointer < len(code):
+        cmd = code[code_pointer]
+        
+        if cmd == '>':
+            pointer += 1
+        elif cmd == '<':
+            pointer -= 1
+        elif cmd == '+':
+            memory[pointer] = (memory[pointer] + 1) % 256
+        elif cmd == '-':
+            memory[pointer] = (memory[pointer] - 1) % 256
+        elif cmd == '.':
+            output.append(chr(memory[pointer]))
+        elif cmd == ',':
+            if input_pointer < len(input_data):
+                memory[pointer] = ord(input_data[input_pointer])
+                input_pointer += 1
+            else:
+                memory[pointer] = 0
+        elif cmd == '[':
+            if memory[pointer] == 0:
+                code_pointer = brackets[code_pointer]
+        elif cmd == ']':
+            if memory[pointer] != 0:
+                code_pointer = brackets[code_pointer]
+        
+        code_pointer += 1
+    
+    return ''.join(output)
 
-**功能**: Cisco Type 7密码加解密
+# 使用
+bf_code = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++."
+result = brainfuck_interpret(bf_code)
+print(f"输出: {result}")  # Hello World!
+```
 
-## 国密算法
+### 国密算法（SM2/SM3/SM4）
 
-### SM2/SM3/SM4
-**GitHub项目**:
-- [JuneAndGreen/sm-crypto](https://github.com/JuneAndGreen/sm-crypto) - JavaScript实现
-- [ZZMarquis/gmhelper](https://github.com/ZZMarquis/gmhelper) - Java实现
-- [milu001/sm234_decrypt_gui](https://github.com/milu001/sm234_decrypt_gui) - GUI工具
+**下载链接**:
+```
+# JavaScript实现
+https://github.com/JuneAndGreen/sm-crypto
 
-**功能**: 中国商用密码算法
+# Java实现
+https://github.com/ZZMarquis/gmhelper
 
-**包含**:
-- SM2: 椭圆曲线公钥密码算法
-- SM3: 哈希算法
-- SM4: 分组密码算法
+# GUI工具
+https://github.com/milu001/sm234_decrypt_gui
+```
 
-## 其他工具
+**安装使用（Python）**:
+```bash
+pip install gmssl
+```
 
-### Enigma密码机
-**在线工具**:
-- [Atoolbox](http://www.atoolbox.net/Tool.php?Id=993)
+**Python示例**:
+```python
+from gmssl import sm2, sm3, sm4, func
 
-**功能**: 模拟二战德国Enigma密码机
+# SM3哈希
+data = b"Hello World"
+hash_value = sm3.sm3_hash(func.bytes_to_list(data))
+print(f"SM3: {hash_value}")
+
+# SM4对称加密
+sm4_key = b'0123456789abcdef'  # 16字节密钥
+sm4_cipher = sm4.CryptSM4()
+sm4_cipher.set_key(sm4_key, sm4.SM4_ENCRYPT)
+
+plaintext = b'Hello World!'
+# Padding到16字节倍数
+padded = plaintext + b'\x00' * (16 - len(plaintext) % 16)
+ciphertext = sm4_cipher.crypt_ecb(func.bytes_to_list(padded))
+print(f"SM4加密: {bytes(ciphertext).hex()}")
+
+# SM4解密
+sm4_cipher.set_key(sm4_key, sm4.SM4_DECRYPT)
+decrypted = bytes(sm4_cipher.crypt_ecb(ciphertext))
+print(f"SM4解密: {decrypted.rstrip(b'\x00')}")
+
+# SM2非对称加密（需要生成密钥对）
+# 注意：完整的SM2实现较复杂，这里展示基本用法
+```
 
 ### CrypTool
-**下载**: [https://www.cryptool.org/en/ct2/downloads/](https://www.cryptool.org/en/ct2/downloads/)
+
+**下载链接**:
+```
+https://www.cryptool.org/en/ct2/downloads/
+```
 
 **功能**: 密码学学习软件
 
 **特点**:
 - 图形化界面
-- 包含大量算法
+- 包含200+种算法
+- 频率分析工具
+- 密码破解演示
 - 教学友好
+
+### Emoji-AES爆破工具
+
+**下载链接**:
+```
+https://github.com/Mumuzi7179/emoji_aes_burst
+```
+
+**安装使用**:
+```bash
+git clone https://github.com/Mumuzi7179/emoji_aes_burst.git
+cd emoji_aes_burst
+pip install -r requirements.txt
+
+# 爆破
+python emoji_aes_burst.py -c "密文" -w wordlist.txt
+```
+
+### 文本盲水印
+
+**下载链接**:
+```
+https://github.com/guofei9987/text_blind_watermark
+```
+
+**安装**:
+```bash
+pip install text_blind_watermark
+```
+
+**使用**:
+```python
+from text_blind_watermark import TextBlindWatermark
+
+# 嵌入水印
+watermark = "secret"
+text = "这是原始文本内容"
+watermarked = TextBlindWatermark().embed(text, watermark)
+print(f"加水印后: {watermarked}")
+
+# 提取水印
+extracted = TextBlindWatermark().extract(watermarked)
+print(f"提取水印: {extracted}")
+```
+
+### 零宽字符工具库
+
+**下载链接**:
+```
+https://github.com/yuanfux/zero-width-lib
+```
+
+**安装**:
+```bash
+npm install zero-width-lib
+```
+
+**使用**:
+```javascript
+const zeroWidth = require('zero-width-lib');
+
+// 编码
+const encoded = zeroWidth.encode('secret message');
+const hidden = 'Normal text' + encoded;
+
+// 解码
+const decoded = zeroWidth.decode(hidden);
+console.log(decoded);  // 'secret message'
+```
+
+## 识别技巧
+
+### 字符特征
+
+| 编码类型 | 字符特征 | 示例 |
+|---------|---------|------|
+| Brainfuck | `><+-.,[]` | `+++++[>++<-]>.` |
+| Ook! | `Ook. Ook? Ook!` | `Ook. Ook. Ook.` |
+| JSFuck | `[]()!+` | `[][(![]+[])[+[]]]` |
+| AAencode | 颜文字 | `(ﾟДﾟ) [ﾟΘﾟ]` |
+| DNA | ATCG | `ATCGATCG` |
+| 零宽字符 | 看不见但存在 | 复制后长度不对 |
+
+### 检测流程
+
+```
+1. 文本长度异常
+   └─ 复制后长度 > 显示长度 → 可能有零宽字符
+
+2. 纯字符集识别
+   ├─ 只有[]()!+ → JSFuck
+   ├─ 只有><+-.,[] → Brainfuck
+   ├─ Ook重复 → Ook!
+   └─ 颜文字 → AAencode/JJencode
+
+3. 特殊格式
+   ├─ ATCG碱基 → DNA编码
+   ├─ 全是Emoji → Emoji-AES
+   └─ 看起来正常但有蹊跷 → 隐写术
+
+4. 使用工具批量尝试
+```
 
 ## CTF解题技巧
 
 !!! tip "识别特殊编码"
-    1. **看字符集**: 
-       - 只有`[]()!+` → JSFuck
-       - 只有`><+-.,[]` → Brainfuck
-       - 颜文字 → AAencode/JJencode
-       - Emoji → Emoji-AES
-    2. **看格式**:
-       - 佛经文字 → 与佛论禅
-       - 核心价值观 → 社会主义编码
-       - DNA碱基 → DNA编码
-    3. **隐藏信息**:
-       - 复制文本到文本编辑器查看长度
-       - 检查零宽字符
-       - 使用十六进制查看器
+    **看字符集**:
+    - 只有`[]()!+` → JSFuck
+    - 只有`><+-.,[]` → Brainfuck
+    - 只有`Ook` → Ook!
+    - 颜文字 → AAencode/JJencode/PPencode
+    - 只有Emoji → Emoji-AES
+    - 只有ATCG → DNA编码
+    
+    **看格式**:
+    - 佛经文字 → 与佛论禅
+    - 核心价值观 → 社会主义编码
+    - 文本长度异常 → 零宽字符隐写
 
 !!! tip "提取隐藏信息"
-    1. 使用在线零宽检测工具
-    2. Python处理文本
-    3. 十六进制编辑器查看
-    4. strings命令提取
+    ```python
+    # 1. 检查文本长度
+    visible_len = len(text.strip())
+    actual_len = len(text)
+    if actual_len > visible_len:
+        print("可能有隐藏字符")
+    
+    # 2. 十六进制查看
+    print(text.encode('utf-8').hex())
+    
+    # 3. 逐字符检查Unicode
+    for i, char in enumerate(text):
+        code = ord(char)
+        if code in [0x200B, 0x200C, 0x200D, 0xFEFF]:
+            print(f"位置{i}: 零宽字符 U+{code:04X}")
+    
+    # 4. 使用工具
+    # - 在线零宽检测工具
+    # - SNOW工具提取空白隐写
+    # - strings命令查看可打印字符
+    ```
+
+!!! tip "Brainfuck/Ook!解题"
+    ```python
+    # 直接使用在线工具
+    # 或本地解释器
+    import sys
+    
+    # 清理代码（只保留有效字符）
+    bf_code = ''.join(c for c in code if c in '><+-.,[]')
+    
+    # 运行解释器
+    result = brainfuck_interpret(bf_code)
+    ```
+
+!!! tip "JSFuck解题"
+    ```javascript
+    // 方法1：直接eval（不推荐，有安全风险）
+    eval(jsfuck_code)
+    
+    // 方法2：使用在线工具解密
+    // 方法3：手动分析（困难）
+    ```
 
 !!! warning "注意事项"
-    - 某些编码需要特定环境运行
-    - 注意字符编码问题(UTF-8)
-    - 零宽字符复制粘贴可能丢失
-    - 建议保存原始文件
+    - **零宽字符**: 复制粘贴可能丢失，保存原始文件
+    - **字符编码**: 确保使用UTF-8
+    - **Brainfuck超时**: 死循环检测
+    - **JSFuck运行**: 可能执行恶意代码，沙箱运行
+    - **SNOW隐写**: 必须保留原始空白字符
+    - **国密算法**: 密钥格式和填充方式
+
+!!! tip "工具组合"
+    ```bash
+    # 1. 检查零宽字符
+    cat file.txt | od -c | grep -E '200[bcd]|feff'
+    
+    # 2. SNOW提取
+    snow -C -p "password" file.txt
+    
+    # 3. 字符串提取
+    strings file.bin
+    
+    # 4. Python综合检测
+    python -c "
+    import sys
+    text = open('file.txt', 'r', encoding='utf-8').read()
+    # 零宽检测
+    for c in text:
+        if ord(c) in [0x200B, 0x200C, 0x200D, 0xFEFF]:
+            print(f'Zero-width: U+{ord(c):04X}')
+    "
+    ```
+
+## 相关资源
+
+- **零宽字符**: 多个在线工具可检测和解码
+- **Brainfuck**: 使用在线解释器或本地Python实现
+- **SNOW**: 空白字符隐写的经典工具
+- **国密算法**: gmssl Python库提供完整实现
+- **CrypTool**: 教学用密码学软件，图形界面友好
