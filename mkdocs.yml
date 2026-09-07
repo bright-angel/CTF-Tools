@@ -89,6 +89,7 @@ nav:
       - 文件分析: misc/file.md
       - 图片处理: misc/image.md
       - 音频视频: misc/audio-video.md
+      - 网络协议: misc/network.md
       - 其他: misc/others.md
       - 综合工具: misc/comprehensive.md
   - 关于: about.md
