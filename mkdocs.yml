@@ -60,6 +60,7 @@ nav:
   - 首页: index.md
   - 快速开始: quickstart.md
   - 搜索指南: search-guide.md
+  - 使用指南: guide.md
   - 编码解码:
       - Base系列: encode/base.md
       - URL编码: encode/url.md

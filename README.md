@@ -2,11 +2,11 @@
 
 一个收集整理CTF比赛中常用在线工具的导航网站。
 
-[![Deploy](https://github.com/yourusername/ctf-online-tools/actions/workflows/deploy.yml/badge.svg)](https://github.com/yourusername/ctf-online-tools/actions/workflows/deploy.yml)
+[![Deploy](https://github.com/bright-angel/ctf-online-tools/actions/workflows/deploy.yml/badge.svg)](https://github.com/bright-angel/ctf-online-tools/actions/workflows/deploy.yml)
 
 ## 🚀 在线访问
 
-访问地址: [https://yourusername.github.io/ctf-online-tools/](https://yourusername.github.io/ctf-online-tools/)
+访问地址: [https://bright-angel.github.io/ctf-online-tools/](https://bright-angel.github.io/ctf-online-tools/)
 
 ## 📚 内容分类
 
@@ -93,8 +93,7 @@ mkdocs build
 
 ## 📮 联系方式
 
-- GitHub Issues: [提交问题](https://github.com/yourusername/ctf-online-tools/issues)
-- Email: your-email@example.com
+- GitHub Issues: [提交问题](https://github.com/bright-angel/ctf-online-tools/issues)
 
 ## 🙏 致谢
 
