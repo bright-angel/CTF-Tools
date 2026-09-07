@@ -61,6 +61,9 @@ nav:
   - 编码解码:
       - Base系列: encode/base.md
       - URL编码: encode/url.md
+      - 进制转换: encode/base-conversion.md
+      - 古典密码: encode/classic-cipher.md
+      - 特殊字符: encode/special-chars.md
       - 其他编码: encode/others.md
   - 加密解密:
       - 对称加密: crypto/symmetric.md
