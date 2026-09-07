@@ -1,0 +1,87 @@
+site_name: CTF在线工具导航
+site_description: 收集整理CTF常用的在线工具
+site_author: CTF Tools
+site_url: https://yourusername.github.io/ctf-online-tools/
+
+theme:
+  name: material
+  language: zh
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到暗色模式
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到亮色模式
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.tabs.link
+    - content.code.copy
+    - content.code.annotate
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+      separator: '[\s\-\,\.\!\?\:]+'
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - 首页: index.md
+  - 快速开始: quickstart.md
+  - 搜索指南: search-guide.md
+  - 编码解码:
+      - Base系列: encode/base.md
+      - URL编码: encode/url.md
+      - 其他编码: encode/others.md
+  - 加密解密:
+      - 对称加密: crypto/symmetric.md
+      - 非对称加密: crypto/asymmetric.md
+      - 哈希函数: crypto/hash.md
+  - Web工具:
+      - SQL注入: web/sqli.md
+      - XSS测试: web/xss.md
+      - 其他工具: web/others.md
+  - 逆向工具:
+      - 反编译: reverse/decompiler.md
+      - 在线调试: reverse/debugger.md
+  - 杂项工具:
+      - 隐写分析: misc/stego.md
+      - 文件分析: misc/file.md
+      - 其他: misc/others.md
+  - 关于: about.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yourusername/ctf-online-tools
