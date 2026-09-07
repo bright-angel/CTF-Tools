@@ -93,10 +93,48 @@ Hello -> 48656c6c6f
 ### Morse Code
 **链接**: [https://morsecode.world/international/translator.html](https://morsecode.world/international/translator.html)
 
+**更多工具**:
+- [Hi编码 - 摩尔斯](http://www.hiencode.com/morse.html)
+- [CTFever - 摩尔斯](https://ctfever.uniiem.com/tools/morse-code)
+- [C5R - 摩尔斯](https://c5r.app/tools/morse-code)
+
 **示例**:
 ```
 SOS -> ... --- ...
 ```
+
+### UUencode
+**链接**: [http://www.hiencode.com/uu.html](http://www.hiencode.com/uu.html)
+
+**更多工具**:
+- [BugKu UUencode](https://ctf.bugku.com/tool/uuencode)
+- [茶凑 UUencode](http://web.chacuo.net/charsetuuencode)
+
+**功能**: UU编码和解码
+
+**特点**:
+- Unix-to-Unix编码
+- 邮件传输常用
+- 二进制转文本
+
+### XXencode
+**链接**: [http://www.hiencode.com/xxencode.html](http://www.hiencode.com/xxencode.html)
+
+**更多工具**:
+- [BugKu XXencode](https://ctf.bugku.com/tool/xxencode)
+- [茶凑 XXencode](http://web.chacuo.net/charsetxxencode)
+
+**功能**: XX编码，类似UU编码
+
+### Quoted-Printable
+**链接**: [http://www.hiencode.com/quoted.html](http://www.hiencode.com/quoted.html)
+
+**更多工具**:
+- [茶凑 Quoted-printable](http://web.chacuo.net/charsetquotedprintable/)
+
+**功能**: 可打印字符引用编码
+
+**应用**: 邮件编码常用
 
 !!! tip "识别技巧"
     - 看到 `%XX` 格式 → URL编码

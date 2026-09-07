@@ -25,6 +25,24 @@ Base系列编码是CTF中最常见的编码方式之一。
 - 快速编解码
 - 支持文件上传
 
+### BugKu CTF工具
+**Base16**: [https://ctf.bugku.com/tool/base16](https://ctf.bugku.com/tool/base16)  
+**Base32**: [https://ctf.bugku.com/tool/base32](https://ctf.bugku.com/tool/base32)  
+**Base58**: [https://ctf.bugku.com/tool/base58](https://ctf.bugku.com/tool/base58)  
+**Base62**: [https://ctf.bugku.com/tool/base62](https://ctf.bugku.com/tool/base62)  
+**Base64**: [https://ctf.bugku.com/tool/base64](https://ctf.bugku.com/tool/base64)  
+**Base85**: [https://ctf.bugku.com/tool/base85](https://ctf.bugku.com/tool/base85)  
+**Base91**: [https://ctf.bugku.com/tool/base91](https://ctf.bugku.com/tool/base91)  
+**Base92**: [https://ctf.bugku.com/tool/base92](https://ctf.bugku.com/tool/base92)  
+**Base100**: [https://ctf.bugku.com/tool/base100](https://ctf.bugku.com/tool/base100)
+
+**功能**: CTF专用Base系列编解码
+
+**特点**:
+- 覆盖Base16到Base100
+- 中文界面友好
+- CTF场景优化
+
 ### Base64 Image Encoder
 **链接**: [https://www.base64-image.de/](https://www.base64-image.de/)
 

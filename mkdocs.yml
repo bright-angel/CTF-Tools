@@ -69,17 +69,24 @@ nav:
       - 对称加密: crypto/symmetric.md
       - 非对称加密: crypto/asymmetric.md
       - 哈希函数: crypto/hash.md
+      - 古典密码: crypto/classical.md
+      - 趣味编码: crypto/special.md
   - Web工具:
       - SQL注入: web/sqli.md
       - XSS测试: web/xss.md
       - 其他工具: web/others.md
+      - 综合工具: web/comprehensive.md
   - 逆向工具:
       - 反编译: reverse/decompiler.md
       - 在线调试: reverse/debugger.md
+      - Python逆向: reverse/python.md
+      - Java逆向: reverse/java.md
+      - IDA工具: reverse/tools.md
   - 杂项工具:
       - 隐写分析: misc/stego.md
       - 文件分析: misc/file.md
       - 其他: misc/others.md
+      - 综合工具: misc/comprehensive.md
   - 关于: about.md
 
 extra:

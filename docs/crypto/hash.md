@@ -26,6 +26,15 @@
 - 支持MD5、SHA1、SHA256等
 - 免费快速
 
+### 其他哈希破解站点
+- [CMD5.com](https://www.cmd5.com) - 老牌MD5解密
+- [CMD5.la](https://cmd5.la/) - 备用站点
+- [PMD5.com](https://pmd5.com/) - 快速查询
+- [ChaMD5.org](https://www.chamd5.org/) - 付费高成功率
+- [SoMD5.com](https://www.somd5.com/) - 综合查询
+- [Hashes.com](https://hashes.com/en/decrypt/hash) - 多算法支持
+- [OnlineHashCrack](https://www.onlinehashcrack.com/) - 在线破解
+
 ### MD5解密
 **链接**: [https://www.cmd5.com/](https://www.cmd5.com/)
 
