@@ -1,89 +1,172 @@
-# Base系列编码
+# Base系列编码工具
 
 Base系列编码是CTF中最常见的编码方式之一。
 
 ## 在线工具
 
-### CyberChef
-**链接**: [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/)
+### Base64 编码解码
 
-**功能**: 强大的数据处理工具，支持几乎所有编码解码操作
+| 工具名称 | 链接 | 特点 |
+|---------|------|------|
+| CyberChef | [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/) | 功能最全，支持链式操作 |
+| Base64 Decode | [https://www.base64decode.org/](https://www.base64decode.org/) | 界面简洁，支持文件 |
+| BugKu Base64 | [https://ctf.bugku.com/tool/base64](https://ctf.bugku.com/tool/base64) | CTF专用，中文友好 |
 
-**特点**:
-- 支持Base16/32/64/85等多种Base编码
-- 可以链式处理多个操作
-- 提供配方(Recipe)保存功能
-- 完全离线可用
+### Base系列全家桶 (BugKu)
 
-### Base64 在线编解码
-**链接**: [https://www.base64decode.org/](https://www.base64decode.org/)
+| 编码类型 | 在线工具链接 | 字符集 |
+|---------|-------------|--------|
+| Base16 | [https://ctf.bugku.com/tool/base16](https://ctf.bugku.com/tool/base16) | 0-9, A-F |
+| Base32 | [https://ctf.bugku.com/tool/base32](https://ctf.bugku.com/tool/base32) | A-Z, 2-7 |
+| Base58 | [https://ctf.bugku.com/tool/base58](https://ctf.bugku.com/tool/base58) | 去除易混淆字符 |
+| Base62 | [https://ctf.bugku.com/tool/base62](https://ctf.bugku.com/tool/base62) | A-Z, a-z, 0-9 |
+| Base64 | [https://ctf.bugku.com/tool/base64](https://ctf.bugku.com/tool/base64) | A-Z, a-z, 0-9, +, / |
+| Base85 | [https://ctf.bugku.com/tool/base85](https://ctf.bugku.com/tool/base85) | ASCII可见字符 |
+| Base91 | [https://ctf.bugku.com/tool/base91](https://ctf.bugku.com/tool/base91) | 91个字符 |
+| Base92 | [https://ctf.bugku.com/tool/base92](https://ctf.bugku.com/tool/base92) | 92个字符 |
+| Base100 | [https://ctf.bugku.com/tool/base100](https://ctf.bugku.com/tool/base100) | Emoji编码 |
 
-**功能**: 简单的Base64编解码
+### Base64图片编码
 
-**特点**:
-- 界面简洁
-- 快速编解码
-- 支持文件上传
+| 工具名称 | 链接 | 功能 |
+|---------|------|------|
+| Base64 Image | [https://www.base64-image.de/](https://www.base64-image.de/) | 图片与Base64互转 |
 
-### BugKu CTF工具 - Base系列
-**Base16**: [https://ctf.bugku.com/tool/base16](https://ctf.bugku.com/tool/base16)  
-**Base32**: [https://ctf.bugku.com/tool/base32](https://ctf.bugku.com/tool/base32)  
-**Base58**: [https://ctf.bugku.com/tool/base58](https://ctf.bugku.com/tool/base58)  
-**Base62**: [https://ctf.bugku.com/tool/base62](https://ctf.bugku.com/tool/base62)  
-**Base64**: [https://ctf.bugku.com/tool/base64](https://ctf.bugku.com/tool/base64)  
-**Base85**: [https://ctf.bugku.com/tool/base85](https://ctf.bugku.com/tool/base85)  
-**Base91**: [https://ctf.bugku.com/tool/base91](https://ctf.bugku.com/tool/base91)  
-**Base92**: [https://ctf.bugku.com/tool/base92](https://ctf.bugku.com/tool/base92)  
-**Base100**: [https://ctf.bugku.com/tool/base100](https://ctf.bugku.com/tool/base100)
+## 离线工具
 
-**功能**: CTF专用Base系列编解码
+### Python base64模块
 
-**特点**:
-- 覆盖Base16到Base100
-- 中文界面友好
-- CTF场景优化
+**安装**: Python内置，无需安装
 
-### Base64 图片编码
-**链接**: [https://www.base64-image.de/](https://www.base64-image.de/)
+**基础用法**:
+```python
+import base64
 
-**功能**: 图片与Base64互转
+# 编码
+data = "Hello World"
+encoded = base64.b64encode(data.encode()).decode()
+print(encoded)  # SGVsbG8gV29ybGQ=
 
-**特点**:
-- 支持图片转Base64
-- 支持Base64转图片预览
+# 解码
+decoded = base64.b64decode(encoded).decode()
+print(decoded)  # Hello World
 
-## 常见Base编码对照
+# Base32
+b32_encoded = base64.b32encode(data.encode()).decode()
+print(b32_encoded)
 
-| 编码类型 | 字符集 | 用途 |
-|---------|--------|------|
-| Base16 | 0-9, A-F | 十六进制表示 |
-| Base32 | A-Z, 2-7 | 常用于某些加密场景 |
-| Base64 | A-Z, a-z, 0-9, +, / | 最常见，用于数据传输 |
-| Base85 | ASCII可见字符 | 压缩率更高 |
+# Base16
+b16_encoded = base64.b16encode(data.encode()).decode()
+print(b16_encoded)
+```
+
+**多次解码**:
+```python
+import base64
+
+def multi_base64_decode(data, max_times=10):
+    """尝试多次Base64解码"""
+    for i in range(max_times):
+        try:
+            data = base64.b64decode(data).decode()
+            print(f"第{i+1}次解码: {data}")
+        except:
+            print(f"解码{i}次后停止")
+            break
+    return data
+
+# 使用
+encoded = "U0dWc2JHOGdWMjl5YkdRPQ=="  # 三次Base64编码
+result = multi_base64_decode(encoded)
+```
+
+### CyberChef 离线版
+
+**下载**:
+```
+https://github.com/gchq/CyberChef/releases
+```
+
+**安装**:
+1. 下载zip文件
+2. 解压到本地
+3. 打开`CyberChef_vX.X.X.html`
+
+**使用方法**:
+- 从左侧拖拽操作到中间Recipe区域
+- 在Input区域输入数据
+- 自动在Output区域显示结果
+- 可保存Recipe供后续使用
+
+## 编码对照表
+
+| 编码类型 | 字符集 | 编码长度 | 用途 |
+|---------|--------|----------|------|
+| Base16 | 0-9, A-F | 原长度×2 | 十六进制表示 |
+| Base32 | A-Z, 2-7 | 原长度×1.6 | 某些加密场景 |
+| Base58 | 去除0OIl | 原长度×1.37 | 比特币地址 |
+| Base64 | A-Z, a-z, 0-9, +, / | 原长度×1.33 | 最常用，数据传输 |
+| Base85 | ASCII 33-117 | 原长度×1.25 | 压缩率更高 |
+| Base100 | Emoji | 原长度×4-8 | 趣味编码 |
 
 ## 识别技巧
 
-- **Base64**: 通常以 `=` 或 `==` 结尾，字符集包含大小写字母、数字、+、/
-- **Base32**: 全大写字母加数字2-7，可能以 `=` 结尾
-- **Base16**: 只包含0-9和A-F（或a-f）
+### 字符特征
 
-!!! tip "快速识别"
-    Base64编码后的长度是原始数据的4/3倍，且通常能被4整除。
+| Base类型 | 特征 |
+|---------|------|
+| Base64 | 包含大小写字母、数字、+、/，可能以=结尾 |
+| Base32 | 全大写字母A-Z + 数字2-7，可能以=结尾 |
+| Base16 | 只包含0-9和A-F（或a-f） |
+| Base58 | 不包含0、O、I、l，只有大小写字母和数字 |
+| Base100 | 全是Emoji表情符号 |
+
+### 长度规律
+
+```python
+# Base64长度计算
+原始长度 = n字节
+Base64长度 = ⌈n/3⌉ × 4 字符
+# 长度一定是4的倍数（含padding）
+
+# 示例
+原始: "A" (1字节) → Base64: "QQ==" (4字符)
+原始: "AB" (2字节) → Base64: "QUI=" (4字符)
+原始: "ABC" (3字节) → Base64: "QUJD" (4字符)
+```
 
 ## CTF解题技巧
 
-!!! tip "多层编码"
-    CTF中常见多次Base64编码，可以尝试：
+!!! tip "快速识别"
+    1. 看字符集：是否只包含特定字符
+    2. 看长度：Base64长度能被4整除
+    3. 看结尾：Base64/32可能有=填充
+    4. 看规律：尝试解码，看是否可读
+
+!!! tip "常见考点"
+    - **多层编码**: 连续多次Base64编码
+    - **混合编码**: Base64+URL+Hex组合
+    - **自定义表**: 修改标准Base64字符表
+    - **无padding**: 去掉=填充符
+    - **URL safe**: 用-和_替换+和/
+
+!!! warning "变种处理"
     ```python
-    import base64
-    data = "密文"
-    for i in range(10):  # 尝试解码10次
-        try:
-            data = base64.b64decode(data).decode()
-            print(f"第{i+1}次: {data}")
-        except:
-            break
+    # 标准Base64字符表
+    standard = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+    
+    # 自定义字符表示例
+    custom = "ZYXWVUTSRQPONMLKJIHGFEDCBAzyxwvutsrqponmlkjihgfedcba9876543210+/"
+    
+    # 转换函数
+    def custom_base64_decode(data, custom_table):
+        import base64
+        trans_table = str.maketrans(custom_table, standard)
+        standard_data = data.translate(trans_table)
+        return base64.b64decode(standard_data)
     ```
 
-!!! tip "变种Base64"
-    注意自定义字符表的Base64变种，可能字符集不同
+## 相关资源
+
+- **RFC 4648**: Base编码标准文档
+- **CyberChef食谱**: [https://github.com/mattnotmax/cyberchef-recipes](https://github.com/mattnotmax/cyberchef-recipes)

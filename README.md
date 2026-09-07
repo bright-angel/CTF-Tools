@@ -1,6 +1,20 @@
-# CTF在线工具导航
+# CTF Tool Wiki
 
-一个收集整理CTF比赛中常用在线工具的导航网站。
+CTF工具百科 - 收集整理CTF比赛中的在线工具和离线工具。
+
+[![Deploy](https://github.com/bright-angel/CTF-Tools/actions/workflows/deploy.yml/badge.svg)](https://github.com/bright-angel/CTF-Tools/actions/workflows/deploy.yml)
+
+## 🚀 在线访问
+
+访问地址: [https://bright-angel.github.io/CTF-Tools/](https://bright-angel.github.io/CTF-Tools/)
+
+## 📚 内容分类
+
+### 在线工具
+- **编码解码**: Base系列、URL编码、摩尔斯电码等
+- **加密解密**: 对称/非对称加密、哈希、古典密码
+- **Web工具**: SQL注入、XSS测试、浏览器插件
+- **在线反编译**: Java/Python在线反编译
 
 [![Deploy](https://github.com/bright-angel/ctf-online-tools/actions/workflows/deploy.yml/badge.svg)](https://github.com/bright-angel/ctf-online-tools/actions/workflows/deploy.yml)
 

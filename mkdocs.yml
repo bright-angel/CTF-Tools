@@ -1,7 +1,7 @@
 site_name: CTF在线工具导航
 site_description: 收集整理CTF常用的在线工具
 site_author: CTF Tools
-site_url: https://yourusername.github.io/ctf-online-tools/
+site_url: https://github.com/bright-angel/CTF-Tools
 
 theme:
   name: material
@@ -60,7 +60,6 @@ nav:
   - 首页: index.md
   - 快速开始: quickstart.md
   - 搜索指南: search-guide.md
-  - 使用指南: guide.md
   - 编码解码:
       - Base系列: encode/base.md
       - URL编码: encode/url.md
@@ -93,4 +92,4 @@ nav:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/yourusername/ctf-online-tools
+      link: https://github.com/bright-angel/CTF-Tools
