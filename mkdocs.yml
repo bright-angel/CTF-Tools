@@ -91,6 +91,7 @@ nav:
       - 音频视频: misc/audio-video.md
       - 网络协议: misc/network.md
       - 文本处理: misc/text-processing.md
+      - 压缩包分析: misc/archive.md
       - 其他: misc/others.md
       - 综合工具: misc/comprehensive.md
   - 关于: about.md
