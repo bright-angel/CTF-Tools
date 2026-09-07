@@ -67,15 +67,18 @@ java -jar cfr.jar app.jar --outputdir output/
 ## 综合工具
 
 ### Bytecode Viewer
+**官网**: [https://bytecodeviewer.com/](https://bytecodeviewer.com/)
+
 **GitHub**: [https://github.com/Konloch/bytecode-viewer](https://github.com/Konloch/bytecode-viewer)
 
-**功能**: 多合一Java逆向工具
+**功能**: 开源轻量Java反编译工具
 
 **特点**:
 - 集成多个反编译器
 - 字节码查看
-- APK反编译
+- 支持JAR/APK/CLASS
 - 插件支持
+- 跨平台
 
 ### Jar Analyzer
 **GitHub**: [https://github.com/jar-analyzer/jar-analyzer](https://github.com/jar-analyzer/jar-analyzer)

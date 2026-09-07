@@ -31,7 +31,14 @@ exiftool -all= image.jpg  # 删除所有元数据
 ### Binwalk
 **安装**: `apt install binwalk`
 
+**GitHub**: [https://github.com/ReFirmLabs/binwalk/releases](https://github.com/ReFirmLabs/binwalk/releases)
+
 **功能**: 固件分析和文件提取
+
+**特点**:
+- 搜索二进制镜像文件
+- 提取嵌入的文件和代码
+- 固件逆向必备
 
 **用法**:
 ```bash
@@ -62,6 +69,17 @@ foremost -t jpg,png,pdf -i file.bin -o output/
 - 免费
 - 快速
 - 支持大文件
+
+### WinHex
+**下载**: [http://www.x-ways.net/winhex.zip](http://www.x-ways.net/winhex.zip)
+
+**功能**: 专业十六进制编辑器
+
+**特点**:
+- 数据恢复
+- 低级数据处理
+- 磁盘编辑
+- 强大的搜索功能
 
 ### 010 Editor
 **链接**: [https://www.sweetscape.com/010editor/](https://www.sweetscape.com/010editor/)
@@ -138,6 +156,17 @@ fcrackzip -u -D -p rockyou.txt file.zip
 fcrackzip -b -c a -p aaaaaa --method 2 file.zip
 ```
 
+#### Ziperello
+**下载**: [百度网盘](https://pan.baidu.com/s/1z9b_NWOjQvGWmTRn9H5vBQ)
+
+**功能**: ZIP密码破解工具
+
+**特点**:
+- GUI界面
+- 暴力破解
+- 字典破解
+- Windows平台
+
 #### John the Ripper
 **链接**: [https://www.openwall.com/john/](https://www.openwall.com/john/)
 
@@ -160,6 +189,26 @@ hashcat -m 17200 hash.txt wordlist.txt
 hashcat -m 13000 hash.txt wordlist.txt
 ```
 
+#### cRARk
+**链接**: [http://www.crark.net/](http://www.crark.net/)
+
+**功能**: RAR密码破解工具
+
+**特点**:
+- 跨平台支持
+- GPU加速
+- 高性能破解
+
+#### RAR Password Unlocker
+**下载**: [百度网盘](https://pan.baidu.com/s/1m2hoPANn5sADfPf5rf2KZA)
+
+**功能**: WinRAR文件密码破解器
+
+**特点**:
+- 暴力破解
+- 字典破解
+- 智能破解
+
 ### CRC32碰撞
 
 #### crc32-tools
@@ -168,6 +217,16 @@ hashcat -m 13000 hash.txt wordlist.txt
 **功能**: CRC32爆破和碰撞
 
 **应用**: 已知CRC32值爆破短文件内容
+
+#### CRC32-Tools
+**GitHub**: [https://github.com/AabyssZG/CRC32-Tools/releases](https://github.com/AabyssZG/CRC32-Tools/releases)
+
+**功能**: ZIP中CRC碰撞脚本
+
+**特点**:
+- 针对ZIP伪加密
+- CRC32碰撞攻击
+- Python脚本
 
 ### 伪加密
 

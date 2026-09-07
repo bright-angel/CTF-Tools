@@ -5,7 +5,9 @@
 ## 图片隐写
 
 ### StegOnline
-**链接**: [https://stegonline.georgeom.net/upload](https://stegonline.georgeom.net/upload)
+**在线**: [https://stegonline.georgeom.net/upload](https://stegonline.georgeom.net/upload)
+
+**GitHub**: [https://github.com/Ge0rg3/StegOnline](https://github.com/Ge0rg3/StegOnline)
 
 **功能**: 在线图片隐写分析
 
@@ -14,6 +16,7 @@
 - 颜色通道分离
 - 位平面查看
 - 数据提取
+- StegSolve的Web版
 
 ### Aperi'Solve
 **链接**: [https://www.aperisolve.com/](https://www.aperisolve.com/)
@@ -87,15 +90,18 @@ steghide info image.jpg
 - 隐藏信息可视化
 
 ### Audacity
-**链接**: [https://www.audacityteam.org/](https://www.audacityteam.org/)
+**下载**: [https://www.audacityteam.org/download/](https://www.audacityteam.org/download/)
 
-**功能**: 音频编辑和分析
+**功能**: 免费音频处理软件
 
 **特点**:
 - 波形查看
 - 频谱分析
 - 查看元数据
 - 反转/变速
+- 常用于音频隐写
+
+**用途**: CTF音频隐写分析必备
 
 ### DeepSound
 **链接**: [http://jpinsoft.net/deepsound/](http://jpinsoft.net/deepsound/)

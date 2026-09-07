@@ -74,6 +74,7 @@ nav:
   - Web工具:
       - SQL注入: web/sqli.md
       - XSS测试: web/xss.md
+      - 浏览器工具: web/browser-tools.md
       - 其他工具: web/others.md
       - 综合工具: web/comprehensive.md
   - 逆向工具:
