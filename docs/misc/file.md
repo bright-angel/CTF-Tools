@@ -2,10 +2,42 @@
 
 用于分析各种文件格式的工具。
 
-## 综合分析
+## 在线工具
 
-### file命令
+### ExifTool 在线版
+**链接**: [https://exif.tools/](https://exif.tools/)
+
+**功能**: 在线查看图片元数据
+
+**特点**:
+- 无需安装
+- 快速查看EXIF信息
+- 支持多种图片格式
+
+### HexEd.it
+**链接**: [https://hexed.it/](https://hexed.it/)
+
+**功能**: 在线十六进制编辑器
+
+**特点**:
+- 无需安装
+- 基础功能完善
+- 隐私友好
+
+## 离线工具
+
+### 文件类型识别
+
+#### file 命令
 **平台**: Linux/macOS/Windows(Git Bash)
+
+**安装**:
+```bash
+# Ubuntu/Debian
+apt install file
+
+# macOS (预装)
+```
 
 **功能**: 识别文件类型
 
@@ -15,10 +47,25 @@ file unknown_file
 file -b unknown_file  # 简洁模式
 ```
 
-### ExifTool
-**链接**: [https://exiftool.org/](https://exiftool.org/)
+#### ExifTool
+**下载**: 
+```
+https://exiftool.org/
+```
 
-**功能**: 读取和修改元数据
+**安装**:
+```bash
+# Ubuntu/Debian
+apt install libimage-exiftool-perl
+
+# macOS
+brew install exiftool
+
+# Windows
+下载exe文件
+```
+
+**功能**: 读取和修改文件元数据
 
 **用法**:
 ```bash
@@ -26,12 +73,25 @@ exiftool image.jpg
 exiftool -all= image.jpg  # 删除所有元数据
 ```
 
-**在线版**: [https://exif.tools/](https://exif.tools/)
+### 固件分析与文件提取
 
-### Binwalk
-**安装**: `apt install binwalk`
+#### Binwalk
+**下载**:
+```
+https://github.com/ReFirmLabs/binwalk/releases
+```
 
-**GitHub**: [https://github.com/ReFirmLabs/binwalk/releases](https://github.com/ReFirmLabs/binwalk/releases)
+**安装**:
+```bash
+# Ubuntu/Debian
+apt install binwalk
+
+# macOS
+brew install binwalk
+
+# Python安装
+pip install binwalk
+```
 
 **功能**: 固件分析和文件提取
 
@@ -47,8 +107,20 @@ binwalk -e firmware.bin  # 自动提取
 binwalk -D='.*' firmware.bin  # 提取所有
 ```
 
-### Foremost
-**安装**: `apt install foremost`
+#### Foremost
+**下载**:
+```
+https://github.com/jin-stuff/foremost
+```
+
+**安装**:
+```bash
+# Ubuntu/Debian
+apt install foremost
+
+# macOS
+brew install foremost
+```
 
 **功能**: 数据雕刻和文件恢复
 
@@ -58,10 +130,13 @@ foremost -i disk.img -o output/
 foremost -t jpg,png,pdf -i file.bin -o output/
 ```
 
-## 十六进制编辑
+### 十六进制编辑器
 
-### HxD
-**链接**: [https://mh-nexus.de/en/hxd/](https://mh-nexus.de/en/hxd/)
+#### HxD (Windows)
+**下载**:
+```
+https://mh-nexus.de/en/hxd/
+```
 
 **功能**: Windows十六进制编辑器
 
@@ -70,8 +145,11 @@ foremost -t jpg,png,pdf -i file.bin -o output/
 - 快速
 - 支持大文件
 
-### WinHex
-**下载**: [http://www.x-ways.net/winhex.zip](http://www.x-ways.net/winhex.zip)
+#### WinHex (Windows)
+**下载**:
+```
+http://www.x-ways.net/winhex.zip
+```
 
 **功能**: 专业十六进制编辑器
 
@@ -81,8 +159,11 @@ foremost -t jpg,png,pdf -i file.bin -o output/
 - 磁盘编辑
 - 强大的搜索功能
 
-### 010 Editor
-**链接**: [https://www.sweetscape.com/010editor/](https://www.sweetscape.com/010editor/)
+#### 010 Editor (跨平台)
+**下载**:
+```
+https://www.sweetscape.com/010editor/
+```
 
 **功能**: 专业十六进制编辑器
 
@@ -90,18 +171,24 @@ foremost -t jpg,png,pdf -i file.bin -o output/
 - 模板系统
 - 脚本支持
 - 结构化查看
+- 商业软件
 
-### HexEd.it
-**链接**: [https://hexed.it/](https://hexed.it/)
+#### ImHex (开源)
+**下载**:
+```
+https://github.com/WerWolv/ImHex
+```
 
-**功能**: 在线十六进制编辑器
+**功能**: 现代化十六进制编辑器
 
 **特点**:
-- 无需安装
-- 基础功能
-- 隐私友好
+- 开源免费
+- 模式匹配
+- 数据可视化
+- 脚本支持
+- 跨平台
 
-### xxd / hexdump
+#### xxd / hexdump (命令行)
 **平台**: Linux/macOS
 
 **用法**:
@@ -113,10 +200,15 @@ xxd -r hex.txt binary.bin  # 反向转换
 hexdump -C file.bin
 ```
 
-## 字符串提取
+### 字符串提取
 
-### strings
+#### strings (命令行)
 **平台**: Linux/macOS/Windows(Binutils)
+
+**下载** (Windows):
+```
+https://learn.microsoft.com/zh-cn/sysinternals/downloads/strings
+```
 
 **用法**:
 ```bash
@@ -126,8 +218,11 @@ strings -e l file.bin   # Unicode (little-endian)
 strings -e b file.bin   # Unicode (big-endian)
 ```
 
-### FLOSS
-**链接**: [https://github.com/mandiant/flare-floss](https://github.com/mandiant/flare-floss)
+#### FLOSS
+**下载**:
+```
+https://github.com/mandiant/flare-floss
+```
 
 **功能**: 混淆字符串提取
 
@@ -136,19 +231,25 @@ strings -e b file.bin   # Unicode (big-endian)
 - 栈字符串识别
 - 恶意软件分析
 
-## 压缩文件
+### 压缩文件工具
 
-### 7-Zip
-**链接**: [https://www.7-zip.org/](https://www.7-zip.org/)
+#### 7-Zip (跨平台)
+**下载**:
+```
+https://www.7-zip.org/
+```
 
 **功能**: 压缩文件管理
 
-**支持格式**: ZIP, RAR, 7z, TAR, GZ, 等
+**支持格式**: ZIP, RAR, 7z, TAR, GZ等
 
-### 密码破解
+#### 密码破解工具
 
-#### fcrackzip
-**安装**: `apt install fcrackzip`
+##### fcrackzip (Linux)
+**安装**:
+```bash
+apt install fcrackzip
+```
 
 **用法**:
 ```bash
@@ -156,8 +257,11 @@ fcrackzip -u -D -p rockyou.txt file.zip
 fcrackzip -b -c a -p aaaaaa --method 2 file.zip
 ```
 
-#### Ziperello
-**下载**: [百度网盘](https://pan.baidu.com/s/1z9b_NWOjQvGWmTRn9H5vBQ)
+##### Ziperello (Windows)
+**下载**:
+```
+https://pan.baidu.com/s/1z9b_NWOjQvGWmTRn9H5vBQ
+```
 
 **功能**: ZIP密码破解工具
 
@@ -165,10 +269,38 @@ fcrackzip -b -c a -p aaaaaa --method 2 file.zip
 - GUI界面
 - 暴力破解
 - 字典破解
-- Windows平台
 
-#### John the Ripper
-**链接**: [https://www.openwall.com/john/](https://www.openwall.com/john/)
+##### cRARk (跨平台)
+**下载**:
+```
+http://www.crark.net/
+```
+
+**功能**: RAR压缩包密码破解工具
+
+**特点**:
+- 跨平台支持
+- GPU加速
+- 高性能破解
+
+##### RAR Password Unlocker (Windows)
+**下载**:
+```
+https://pan.baidu.com/s/1m2hoPANn5sADfPf5rf2KZA
+```
+
+**功能**: WinRAR文件密码破解器
+
+**特点**:
+- 暴力破解
+- 字典破解
+- 智能破解
+
+##### John the Ripper (跨平台)
+**下载**:
+```
+https://www.openwall.com/john/
+```
 
 **用法**:
 ```bash
@@ -177,8 +309,11 @@ john hash.txt
 john --wordlist=rockyou.txt hash.txt
 ```
 
-#### Hashcat
-**链接**: [https://hashcat.net/hashcat/](https://hashcat.net/hashcat/)
+##### Hashcat (跨平台)
+**下载**:
+```
+https://hashcat.net/hashcat/
+```
 
 **用法**:
 ```bash
@@ -189,37 +324,23 @@ hashcat -m 17200 hash.txt wordlist.txt
 hashcat -m 13000 hash.txt wordlist.txt
 ```
 
-#### cRARk
-**链接**: [http://www.crark.net/](http://www.crark.net/)
-
-**功能**: RAR密码破解工具
-
-**特点**:
-- 跨平台支持
-- GPU加速
-- 高性能破解
-
-#### RAR Password Unlocker
-**下载**: [百度网盘](https://pan.baidu.com/s/1m2hoPANn5sADfPf5rf2KZA)
-
-**功能**: WinRAR文件密码破解器
-
-**特点**:
-- 暴力破解
-- 字典破解
-- 智能破解
-
-### CRC32碰撞
+### CRC32碰撞工具
 
 #### crc32-tools
-**链接**: [https://github.com/theonlypwner/crc32](https://github.com/theonlypwner/crc32)
+**下载**:
+```
+https://github.com/theonlypwner/crc32
+```
 
 **功能**: CRC32爆破和碰撞
 
 **应用**: 已知CRC32值爆破短文件内容
 
 #### CRC32-Tools
-**GitHub**: [https://github.com/AabyssZG/CRC32-Tools/releases](https://github.com/AabyssZG/CRC32-Tools/releases)
+**下载**:
+```
+https://github.com/AabyssZG/CRC32-Tools/releases
+```
 
 **功能**: ZIP中CRC碰撞脚本
 
@@ -228,30 +349,24 @@ hashcat -m 13000 hash.txt wordlist.txt
 - CRC32碰撞攻击
 - Python脚本
 
-### 伪加密
+### PDF分析工具
 
-#### ZIP伪加密修复
+#### pdfinfo (命令行)
+**安装**:
 ```bash
-# 查看压缩文件头
-hexdump -C file.zip | head -20
+# Ubuntu/Debian
+apt install poppler-utils
 
-# 修改加密标志位
-# 全局加密标志: 0x06, 0x07 -> 0x00, 0x00
+# macOS
+brew install poppler
 ```
-
-**工具**: ZipCenOp.jar
-
-## PDF分析
-
-### pdfinfo
-**安装**: `apt install poppler-utils`
 
 **用法**:
 ```bash
 pdfinfo file.pdf
 ```
 
-### pdfdetach
+#### pdfdetach (命令行)
 **功能**: 提取PDF附件
 
 **用法**:
@@ -260,8 +375,12 @@ pdfdetach -list file.pdf
 pdfdetach -save 1 -o output.file file.pdf
 ```
 
-### qpdf
-**功能**: PDF处理工具
+#### qpdf (命令行)
+**安装**:
+```bash
+apt install qpdf
+brew install qpdf
+```
 
 **用法**:
 ```bash
@@ -269,20 +388,26 @@ qpdf --decrypt file.pdf output.pdf
 qpdf --password=pass file.pdf output.pdf
 ```
 
-### PDFStreamDumper
-**链接**: [http://sandsprite.com/blogs/index.php?uid=7&pid=57](http://sandsprite.com/blogs/index.php?uid=7&pid=57)
+#### PDFStreamDumper (Windows)
+**下载**:
+```
+http://sandsprite.com/blogs/index.php?uid=7&pid=57
+```
 
-**功能**: PDF分析工具(Windows)
+**功能**: PDF分析工具
 
 **特点**:
 - JavaScript提取
 - 流分析
 - 恶意代码检测
 
-## 办公文档
+### Office文档分析
 
-### oledump
-**链接**: [https://blog.didierstevens.com/programs/oledump-py/](https://blog.didierstevens.com/programs/oledump-py/)
+#### oledump
+**下载**:
+```
+https://blog.didierstevens.com/programs/oledump-py/
+```
 
 **功能**: OLE文件分析
 
@@ -292,8 +417,11 @@ oledump.py document.doc
 oledump.py -s 1 -v document.doc  # 查看流
 ```
 
-### oletools
-**安装**: `pip install oletools`
+#### oletools
+**安装**:
+```bash
+pip install oletools
+```
 
 **功能**: Office文档分析套件
 
@@ -308,56 +436,13 @@ oledump.py -s 1 -v document.doc  # 查看流
 olevba document.docm
 ```
 
-## 内存转储
+### 数据库工具
 
-### Volatility
-**链接**: [https://github.com/volatilityfoundation/volatility3](https://github.com/volatilityfoundation/volatility3)
-
-**功能**: 内存取证框架
-
-**基本用法**:
-```bash
-vol.py -f memory.dmp windows.info
-vol.py -f memory.dmp windows.pslist
-vol.py -f memory.dmp windows.filescan
+#### SQLite Browser
+**下载**:
 ```
-
-## 网络流量
-
-### Wireshark
-**链接**: [https://www.wireshark.org/](https://www.wireshark.org/)
-
-**功能**: 网络协议分析器
-
-**特点**:
-- 深度包检测
-- 协议解析
-- 流追踪
-- 过滤器
-
-### tcpdump
-**平台**: Linux/macOS
-
-**用法**:
-```bash
-tcpdump -r capture.pcap
-tcpdump -A -r capture.pcap  # ASCII显示
+https://sqlitebrowser.org/
 ```
-
-### NetworkMiner
-**链接**: [https://www.netresec.com/?page=NetworkMiner](https://www.netresec.com/?page=NetworkMiner)
-
-**功能**: 网络取证工具
-
-**特点**:
-- 自动提取文件
-- 主机分析
-- 凭证提取
-
-## 数据库
-
-### SQLite Browser
-**链接**: [https://sqlitebrowser.org/](https://sqlitebrowser.org/)
 
 **功能**: SQLite数据库查看器
 
@@ -366,7 +451,7 @@ tcpdump -A -r capture.pcap  # ASCII显示
 - 跨平台
 - SQL查询
 
-### sqlite3
+#### sqlite3 (命令行)
 **平台**: 内置于大多数系统
 
 **用法**:
@@ -376,6 +461,18 @@ sqlite3 database.db
 .schema table_name
 SELECT * FROM table_name;
 ```
+
+### Minecraft工具
+
+#### NBTExplorer
+**下载**:
+```
+https://github.com/jaquadro/NBTExplorer
+```
+
+**功能**: Minecraft NBT文件查看器
+
+**用途**: CTF Minecraft题目
 
 ## CTF解题技巧
 

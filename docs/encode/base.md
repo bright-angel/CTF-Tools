@@ -15,7 +15,7 @@ Base系列编码是CTF中最常见的编码方式之一。
 - 提供配方(Recipe)保存功能
 - 完全离线可用
 
-### Base64 Decode and Encode
+### Base64 在线编解码
 **链接**: [https://www.base64decode.org/](https://www.base64decode.org/)
 
 **功能**: 简单的Base64编解码
@@ -25,7 +25,7 @@ Base系列编码是CTF中最常见的编码方式之一。
 - 快速编解码
 - 支持文件上传
 
-### BugKu CTF工具
+### BugKu CTF工具 - Base系列
 **Base16**: [https://ctf.bugku.com/tool/base16](https://ctf.bugku.com/tool/base16)  
 **Base32**: [https://ctf.bugku.com/tool/base32](https://ctf.bugku.com/tool/base32)  
 **Base58**: [https://ctf.bugku.com/tool/base58](https://ctf.bugku.com/tool/base58)  
@@ -43,7 +43,7 @@ Base系列编码是CTF中最常见的编码方式之一。
 - 中文界面友好
 - CTF场景优化
 
-### Base64 Image Encoder
+### Base64 图片编码
 **链接**: [https://www.base64-image.de/](https://www.base64-image.de/)
 
 **功能**: 图片与Base64互转
@@ -69,3 +69,21 @@ Base系列编码是CTF中最常见的编码方式之一。
 
 !!! tip "快速识别"
     Base64编码后的长度是原始数据的4/3倍，且通常能被4整除。
+
+## CTF解题技巧
+
+!!! tip "多层编码"
+    CTF中常见多次Base64编码，可以尝试：
+    ```python
+    import base64
+    data = "密文"
+    for i in range(10):  # 尝试解码10次
+        try:
+            data = base64.b64decode(data).decode()
+            print(f"第{i+1}次: {data}")
+        except:
+            break
+    ```
+
+!!! tip "变种Base64"
+    注意自定义字符表的Base64变种，可能字符集不同
