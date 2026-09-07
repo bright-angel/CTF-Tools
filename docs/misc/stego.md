@@ -2,283 +2,662 @@
 
 隐写术(Steganography)是将信息隐藏在其他文件中的技术。
 
-## 图片隐写
+## 在线工具
 
-### StegOnline
-**在线**: [https://stegonline.georgeom.net/upload](https://stegonline.georgeom.net/upload)
+### 图片隐写分析
 
-**GitHub**: [https://github.com/Ge0rg3/StegOnline](https://github.com/Ge0rg3/StegOnline)
+| 工具名称 | 链接 | 功能 |
+|---------|------|------|
+| StegOnline | [https://stegonline.georgeom.net/upload](https://stegonline.georgeom.net/upload) | LSB分析、位平面查看 |
+| Aperi'Solve | [https://www.aperisolve.com/](https://www.aperisolve.com/) | 自动化图片隐写检测 |
+| Unicode隐写 | [https://www.irongeek.com/i.php?page=security/unicode-steganography-homoglyph-encoder](https://www.irongeek.com/i.php?page=security/unicode-steganography-homoglyph-encoder) | Unicode零宽字符隐写 |
 
-**功能**: 在线图片隐写分析
+### 二维码工具
 
-**特点**:
-- LSB分析
-- 颜色通道分离
-- 位平面查看
-- 数据提取
-- StegSolve的Web版
+| 工具名称 | 链接 | 功能 |
+|---------|------|------|
+| WebQR | [https://www.webqr.com/](https://www.webqr.com/) | 在线二维码识别 |
+| QRazyBox | [https://merricx.github.io/qrazybox/](https://merricx.github.io/qrazybox/) | 二维码修复与分析 |
 
-### Aperi'Solve
-**链接**: [https://www.aperisolve.com/](https://www.aperisolve.com/)
+## 离线工具
 
-**功能**: 自动化图片隐写检测
+### 图片隐写
 
-**特点**:
-- 集成多种工具
-- 自动尝试各种方法
-- 详细分析报告
-- 非常适合CTF
+#### StegSolve
 
-### StegSolve
-**下载**: [GitHub](https://github.com/zardus/ctf-tools/tree/master/stegsolve)
-
-**功能**: 图片隐写分析工具(Java)
-
-**特点**:
-- 通道查看
-- LSB提取
-- 图片对比
-- 数据浏览器
-
-### Zsteg
-**安装**: `gem install zsteg`
-
-**功能**: PNG/BMP隐写检测
-
-**用法**:
-```bash
-zsteg image.png
-zsteg -a image.png  # 尝试所有方法
+**下载链接**:
+```
+https://github.com/zardus/ctf-tools/blob/master/stegsolve/install
+http://www.caesum.com/handbook/Stegsolve.jar
 ```
 
-### Steghide
-**安装**: `apt install steghide`
-
-**功能**: 图片/音频隐写工具
-
-**用法**:
+**安装使用**:
 ```bash
-# 提取
-steghide extract -sf image.jpg
+# 运行
+java -jar Stegsolve.jar
+```
+
+**功能**:
+- 颜色通道分离 (Red/Green/Blue 0-7)
+- LSB位平面查看
+- 图片XOR、ADD、SUB操作
+- 立体图查看
+- 帧浏览器 (GIF动图)
+- 图片组合分析
+- 数据提取器
+
+**使用技巧**:
+```
+1. 打开图片后用箭头键切换通道
+2. Analyse -> Data Extract 提取数据
+3. Analyse -> Frame Browser 查看GIF帧
+4. Analyse -> Image Combiner 组合两张图
+```
+
+#### zsteg
+
+**下载链接**:
+```
+gem install zsteg
+```
+
+**功能**: PNG/BMP隐写自动检测
+
+**基本使用**:
+```bash
+# 快速扫描
+zsteg image.png
+
+# 尝试所有方法
+zsteg -a image.png
+
+# 详细输出
+zsteg -v image.png
+
+# 仅LSB
+zsteg --lsb image.png
+
+# 提取特定通道
+zsteg -E "b1,rgb,lsb,xy" image.png > output.txt
+```
+
+**检测内容**:
+- LSB隐写
+- OpenStego
+- Camouflage
+- LSB with The Eratosthenes set
+- 各种字节序和通道组合
+
+#### Steghide
+
+**下载链接**:
+```
+https://steghide.sourceforge.net/
+```
+
+**安装**:
+```bash
+# Ubuntu/Debian
+apt install steghide
+
+# macOS
+brew install steghide
+```
+
+**基本使用**:
+```bash
+# 嵌入文件
+steghide embed -cf cover.jpg -ef secret.txt -p password
+
+# 提取文件
+steghide extract -sf stego.jpg -p password
+
+# 不用密码
+steghide extract -sf stego.jpg
 
 # 查看信息
-steghide info image.jpg
+steghide info stego.jpg
+
+# 获取嵌入容量
+steghide --encinfo -sf cover.jpg
 ```
 
 **支持格式**: JPEG, BMP, WAV, AU
 
-### Stegseek
-**链接**: [https://github.com/RickdeJager/stegseek](https://github.com/RickdeJager/stegseek)
+#### Stegseek
 
-**功能**: Steghide密码爆破
+**下载链接**:
+```
+https://github.com/RickdeJager/stegseek
+```
+
+**安装**:
+```bash
+# Ubuntu/Debian
+wget https://github.com/RickdeJager/stegseek/releases/download/v0.6/stegseek_0.6-1.deb
+dpkg -i stegseek_0.6-1.deb
+```
+
+**使用**:
+```bash
+# 字典爆破steghide密码
+stegseek image.jpg rockyou.txt
+
+# 使用默认字典
+stegseek image.jpg
+
+# 指定输出文件
+stegseek image.jpg wordlist.txt -xf output.txt
+```
+
+**特点**: 比stegcracker快数千倍
+
+#### stegcracker
+
+**下载链接**:
+```
+pip install stegcracker
+```
+
+**使用**:
+```bash
+stegcracker image.jpg rockyou.txt
+```
+
+#### outguess
+
+**下载链接**:
+```
+https://github.com/resurrecting-open-source-projects/outguess
+```
+
+**安装**:
+```bash
+apt install outguess
+```
+
+**使用**:
+```bash
+# 提取
+outguess -r image.jpg output.txt
+
+# 嵌入
+outguess -d secret.txt cover.jpg stego.jpg
+```
+
+#### jsteg
+
+**下载链接**:
+```
+https://github.com/lukechampine/jsteg
+```
+
+**功能**: JPEG隐写
+
+**使用**:
+```bash
+# 提取
+jsteg reveal image.jpg output.txt
+
+# 嵌入
+jsteg hide cover.jpg secret.txt stego.jpg
+```
+
+#### F5-steganography
+
+**下载链接**:
+```
+https://github.com/matthewgao/F5-steganography
+```
+
+**功能**: F5算法JPEG隐写
+
+**使用**:
+```bash
+java Extract stego.jpg -p password
+```
+
+#### BlindWatermark
+
+**下载链接**:
+```
+https://github.com/chishaxie/BlindWaterMark
+```
+
+**功能**: 频域盲水印
+
+**安装使用**:
+```bash
+pip install blind-watermark
+
+# 提取水印
+python bwm.py decode image.png output.png
+```
+
+### 音频隐写
+
+#### Audacity
+
+**下载链接**:
+```
+https://www.audacityteam.org/download/
+```
+
+**功能**: 音频编辑和分析
+
+**使用技巧**:
+```
+1. 导入音频文件
+2. 查看波形 - 可能有摩斯电码等视觉信息
+3. 频谱图 (Analyze -> Plot Spectrum) - 查看频域
+4. 声谱图 (View -> Spectrogram) - 可能有隐藏图像
+5. 效果 -> 反转、变速、变调
+6. 分离立体声轨道分析
+```
+
+**常见技巧**:
+- DTMF音频 -> 拨号音译码
+- 摩斯电码 -> 长短波形
+- SSTV图像 -> 慢扫描电视
+- 频谱隐藏文字/图像
+
+#### Sonic Visualiser
+
+**下载链接**:
+```
+https://www.sonicvisualiser.org/
+```
+
+**功能**: 专业音频可视化分析
 
 **特点**:
-- 极快的速度
-- 字典攻击
-- 自动提取
-
-## 音频隐写
-
-### Sonic Visualiser
-**链接**: [https://www.sonicvisualiser.org/](https://www.sonicvisualiser.org/)
-
-**功能**: 音频波形和频谱分析
-
-**特点**:
-- 频谱图查看
+- 频谱图
 - 时域/频域分析
-- 隐藏信息可视化
+- 层叠波形
+- 插件系统
 
-### Audacity
-**下载**: [https://www.audacityteam.org/download/](https://www.audacityteam.org/download/)
+#### DeepSound
 
-**功能**: 免费音频处理软件
-
-**特点**:
-- 波形查看
-- 频谱分析
-- 查看元数据
-- 反转/变速
-- 常用于音频隐写
-
-**用途**: CTF音频隐写分析必备
-
-### DeepSound
-**链接**: [http://jpinsoft.net/deepsound/](http://jpinsoft.net/deepsound/)
-
-**功能**: 音频隐写工具(Windows)
-
-**特点**:
-- WAV/FLAC隐写
-- AES加密
-- 提取隐藏文件
-
-## LSB隐写
-
-### LSB原理
-最低有效位(Least Significant Bit)隐写是最常见的方法。
-
-**原理**: 修改像素值的最后一位来隐藏数据。
-
-**示例**:
+**下载链接**:
 ```
-原始RGB: (255, 254, 253) = (11111111, 11111110, 11111101)
-藏入'A'的一位(0): (11111110, 11111110, 11111101)
+http://jpinsoft.net/deepsound/
 ```
 
-### LSB隐写检测
+**平台**: Windows
+
+**使用**:
+```
+1. 打开音频文件
+2. Extract secret files
+3. 输入密码（如果有）
+```
+
+**支持格式**: WAV, FLAC, WMA, APE
+
+#### Steghide
+
+同样支持WAV和AU格式音频文件
+
+#### DTMF Decoder
+
+**在线工具**: 
+- http://dialabc.com/sound/detect/
+- https://dtmf.netlify.app/
+
+**功能**: 拨号音(DTMF)解码
+
+#### Morse Code
+
+**在线工具**:
+- https://morsecode.world/international/decoder/audio-decoder-adaptive.html
+
+**离线工具**: Audacity手动识别
+
+#### SSTV Decoder
+
+**工具**: MMSSTV, RX-SSTV, QSSTV
+
+**下载链接**:
+```
+http://www.qsl.net/mmhamsoft/mmsstv/
+```
+
+**功能**: 慢扫描电视图像解码
+
+### LSB隐写工具
+
+#### LSBSteg
+
+**下载链接**:
+```
+https://github.com/RobinDavid/LSB-Steganography
+```
+
+**安装使用**:
+```bash
+pip install lsbsteg
+
+# 提取
+python LSBSteg.py decode -i stego.png -o output.txt
+
+# 嵌入
+python LSBSteg.py encode -i cover.png -o stego.png -f secret.txt
+```
+
+#### cloacked-pixel
+
+**下载链接**:
+```
+https://github.com/livz/cloacked-pixel
+```
+
+**功能**: LSB隐写工具
+
+#### Python脚本
+
 ```python
 from PIL import Image
 
-img = Image.open('image.png')
-pixels = img.load()
+def extract_lsb(image_path, output_file):
+    img = Image.open(image_path)
+    binary_data = ""
+    
+    for pixel in img.getdata():
+        for value in pixel[:3]:  # RGB
+            binary_data += str(value & 1)
+    
+    # 转换为字节
+    chars = [binary_data[i:i+8] for i in range(0, len(binary_data), 8)]
+    message = ''.join([chr(int(char, 2)) for char in chars])
+    
+    with open(output_file, 'w') as f:
+        f.write(message)
 
-# 提取LSB
-data = []
-for i in range(img.width):
-    for j in range(img.height):
-        r, g, b = pixels[i, j]
-        data.append(r & 1)
-        data.append(g & 1)
-        data.append(b & 1)
+extract_lsb('stego.png', 'output.txt')
 ```
 
-## 文本隐写
+### 文本隐写
 
-### Unicode隐写
-**工具**: [Unicode Steganography](https://www.irongeek.com/i.php?page=security/unicode-steganography-homoglyph-encoder)
+#### SNOW
 
-**原理**: 使用不可见字符或同形字
+**下载链接**:
+```
+http://www.darkside.com.au/snow/
+```
 
-**示例**:
-- 零宽字符(Zero-Width)
-- 同形异义字符
+**功能**: 空白字符隐写
 
-### 空白隐写
-**工具**: [SNOW](http://www.darkside.com.au/snow/)
-
-**原理**: 在文本文件的空白处(空格/制表符)隐藏信息
-
-**用法**:
+**使用**:
 ```bash
-# 隐藏
-snow -C -m "secret" -p "password" input.txt output.txt
+# 嵌入
+snow -C -m "secret message" -p "password" input.txt output.txt
 
 # 提取
 snow -C -p "password" output.txt
 ```
 
-## ZIP隐写
+#### Unicode零宽字符检测
 
-### Binwalk
-**安装**: `apt install binwalk`
+**Python脚本**:
+```python
+text = open('file.txt', 'r', encoding='utf-8').read()
 
-**功能**: 固件分析和文件提取
+# 检测零宽字符
+zero_width_chars = [
+    '​',  # Zero Width Space
+    '‌',  # Zero Width Non-Joiner
+    '‍',  # Zero Width Joiner
+    '﻿',  # Zero Width No-Break Space
+]
 
-**用法**:
-```bash
-binwalk file.bin
-binwalk -e file.bin  # 自动提取
+for char in zero_width_chars:
+    if char in text:
+        print(f"Found {repr(char)}")
+        print(text.encode('unicode-escape'))
 ```
 
-### Foremost
-**安装**: `apt install foremost`
+### 二维码工具
 
-**功能**: 数据雕刻工具
+#### zbarimg
 
-**用法**:
+**安装**:
 ```bash
-foremost -i file.img -o output/
+apt install zbar-tools
 ```
 
-### 010 Editor
-**链接**: [https://www.sweetscape.com/010editor/](https://www.sweetscape.com/010editor/)
-
-**功能**: 十六进制编辑器
-
-**特点**:
-- 模板支持
-- 结构化查看
-- 强大的搜索
-
-## PDF隐写
-
-### PDF-Parser
-**安装**: `pip install pdfminer.six`
-
-**功能**: PDF内容提取
-
-**用法**:
+**使用**:
 ```bash
-pdf-parser.py file.pdf
-```
-
-### PDFtk
-**安装**: `apt install pdftk`
-
-**功能**: PDF工具包
-
-**用法**:
-```bash
-pdftk file.pdf dump_data  # 查看元数据
-```
-
-## 二维码
-
-### QR Code Reader
-**链接**: [https://www.webqr.com/](https://www.webqr.com/)
-
-**功能**: 在线二维码识别
-
-### QRazyBox
-**链接**: [https://merricx.github.io/qrazybox/](https://merricx.github.io/qrazybox/)
-
-**功能**: QR码分析工具
-
-**特点**:
-- 损坏码修复
-- 数据提取
-- 格式分析
-- XOR操作
-
-### zbarimg
-**安装**: `apt install zbar-tools`
-
-**功能**: 命令行二维码识别
-
-**用法**:
-```bash
+# 识别二维码
 zbarimg image.png
+
+# 批量识别
+zbarimg *.png
 ```
+
+#### qrcode (Python)
+
+**安装**:
+```bash
+pip install qrcode pillow pyzbar
+```
+
+**使用**:
+```python
+from pyzbar.pyzbar import decode
+from PIL import Image
+
+# 解码
+data = decode(Image.open('qr.png'))
+print(data[0].data.decode())
+```
+
+### 其他格式隐写
+
+#### PDF隐写
+
+**pdf-parser**:
+```
+https://blog.didierstevens.com/programs/pdf-tools/
+```
+
+**使用**:
+```bash
+python pdf-parser.py file.pdf
+python pdf-parser.py -s "/JavaScript" file.pdf
+```
+
+#### Office隐写
+
+**oletools**:
+```bash
+pip install oletools
+olevba document.docm
+```
+
+#### 压缩包隐写
+
+见文件分析工具章节的Binwalk、Foremost
 
 ## CTF解题技巧
 
-!!! tip "图片隐写分析流程"
-    1. 查看文件属性和元数据(exiftool)
-    2. 十六进制查看(xxd, hexdump)
-    3. 搜索已知文件头(binwalk)
-    4. LSB分析(stegsolve, zsteg)
-    5. 尝试stegseek暴力破解
-    6. 频域分析(FFT)
-    7. 检查通道和位平面
-
-!!! tip "常见隐写类型识别"
-    - **LSB**: 图片看起来正常，文件稍大
-    - **Steghide**: JPEG文件，需要密码
-    - **附加数据**: 文件末尾有额外数据(binwalk)
-    - **颜色通道**: 特定通道有异常(stegsolve)
-    - **二维码**: 扫描或拼接后是二维码
-
-!!! warning "注意事项"
-    - 保留原始文件，避免损坏
-    - 注意文件格式(PNG/JPEG特性不同)
-    - 某些隐写需要密码(题目描述/文件名)
-    - 提取出的数据可能还需解码
-    - 组合使用多种方法
-
-!!! tip "元数据检查"
+!!! tip "图片隐写标准流程"
     ```bash
+    # 1. 基本信息
+    file image.jpg
     exiftool image.jpg
-    strings file.bin
-    file unknown_file
+    
+    # 2. 查看十六进制
+    xxd image.jpg | head
+    xxd image.jpg | tail
+    
+    # 3. 搜索嵌入文件
+    binwalk image.jpg
+    binwalk -e image.jpg
+    
+    # 4. 字符串提取
+    strings image.jpg | grep -i flag
+    
+    # 5. LSB分析
+    zsteg image.png          # PNG/BMP
+    stegsolve image.jpg      # 所有格式
+    
+    # 6. Steghide检测
+    steghide info image.jpg
+    stegseek image.jpg rockyou.txt
+    
+    # 7. 其他工具
+    outguess -r image.jpg output.txt
+    jsteg reveal image.jpg output.txt
     ```
+
+!!! tip "音频隐写标准流程"
+    ```
+    1. Audacity打开
+       - 查看波形 (摩斯电码、异常波形)
+       - 查看声谱图 (隐藏图像、文字)
+       - Analyze -> Plot Spectrum (频域分析)
+    
+    2. 分离声道
+       - 左右声道可能不同
+       - Tracks -> Mix -> Split Stereo to Mono
+    
+    3. 特殊编码
+       - DTMF (拨号音)
+       - 摩斯电码
+       - SSTV (慢扫描电视)
+    
+    4. Steghide
+       steghide extract -sf audio.wav
+    
+    5. 频谱水印
+       - 调高频谱图对比度
+       - 可能有文字或二维码
+    ```
+
+!!! tip "快速判断隐写类型"
+    ```
+    文件末尾有额外数据 → Binwalk提取
+    JPEG/BMP/WAV → Steghide
+    PNG/BMP → zsteg
+    文件大小异常 → 可能有附加数据
+    JPEG → jsteg, outguess, F5
+    音频声谱图异常 → Audacity查看
+    文本大小异常 → SNOW, Unicode零宽
+    ```
+
+!!! tip "Steghide密码来源"
+    ```
+    1. 题目描述中的关键词
+    2. 文件名
+    3. 图片中可见文字
+    4. 元数据中的信息
+    5. 空密码（直接回车）
+    6. 常见弱密码：password, 123456, admin
+    7. 字典爆破：stegseek + rockyou.txt
+    ```
+
+!!! tip "LSB隐写识别"
+    ```
+    特征：
+    - 文件大小正常或略大
+    - 肉眼无法察觉
+    - 像素最低位被修改
+    
+    检测：
+    - zsteg (PNG/BMP自动化)
+    - StegSolve (查看所有位平面)
+    - 自定义Python脚本
+    
+    提取：
+    - 可能需要指定通道、顺序、位数
+    - RGB vs BGR
+    - 横向 vs 纵向
+    - 1位 vs 多位
+    ```
+
+!!! tip "频域隐写"
+    ```
+    1. 图片频域
+       - 使用Python + FFT
+       - 查看频谱图
+    
+    2. 音频频域
+       - Audacity声谱图
+       - Sonic Visualiser
+       - 可能隐藏文字、图片、二维码
+    
+    3. 盲水印
+       - blind-watermark工具
+       - 频域隐藏，时域不可见
+    ```
+
+!!! tip "多层嵌套"
+    ```
+    提取出的数据可能还需要：
+    1. Base64解码
+    2. 进制转换
+    3. 再次隐写提取
+    4. 压缩包解压
+    5. 二维码识别
+    
+    保持警惕，多次尝试不同方法
+    ```
+
+!!! warning "常见错误"
+    ```
+    1. 直接使用JPEG处理PNG隐写工具
+       - PNG用zsteg
+       - JPEG用steghide/jsteg/outguess
+    
+    2. 修改图片格式后分析
+       - 保留原始文件
+       - 格式转换会破坏隐写数据
+    
+    3. 忽略文件末尾数据
+       - 用binwalk检查
+       - 十六进制查看文件尾
+    
+    4. 只尝试一种工具
+       - 多种工具组合使用
+       - 一种失败尝试另一种
+    
+    5. 忽略密码提示
+       - 仔细阅读题目描述
+       - 检查元数据、文件名
+    ```
+
+!!! tip "工具选择指南"
+    ```
+    PNG/BMP: zsteg (首选), StegSolve
+    JPEG: steghide, stegseek, jsteg, outguess, F5
+    音频WAV: steghide, DeepSound, Audacity
+    音频分析: Audacity, Sonic Visualiser
+    综合分析: StegSolve (图片), Aperi'Solve (在线)
+    LSB自定义: Python PIL库
+    文本: SNOW, Unicode零宽检测
+    二维码: zbarimg, QRazyBox
+    ```
+
+!!! tip "自动化工具"
+    ```bash
+    # Aperi'Solve - 在线自动化
+    https://www.aperisolve.com/
+    
+    # stegpy - Python自动化
+    pip install stegpy
+    stegpy -i image.png
+    
+    # 自定义脚本批量尝试
+    for tool in zsteg steghide outguess jsteg; do
+        echo "Trying $tool..."
+        $tool extract image.jpg 2>/dev/null
+    done
+    ```
+
+## 相关资源
+
+- **StegSolve**: 图片隐写分析必备工具
+- **zsteg**: PNG/BMP自动化检测首选
+- **Stegseek**: Steghide超快速密码爆破
+- **Audacity**: 音频隐写分析标准工具
+- **Aperi'Solve**: 在线自动化隐写检测平台

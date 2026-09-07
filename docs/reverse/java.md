@@ -2,239 +2,349 @@
 
 Java程序的反编译和分析工具。
 
-## 在线反编译
+## 在线工具
 
-### Java Decompilers
-**链接**: [http://www.javadecompilers.com/](http://www.javadecompilers.com/)
+### 在线反编译
 
-**功能**: 在线Java反编译
+| 工具名称 | 链接 | 支持格式 |
+|---------|------|----------|
+| Java Decompilers | [http://www.javadecompilers.com/](http://www.javadecompilers.com/) | .class/.jar |
+| CFR Online | [https://www.benf.org/other/cfr/](https://www.benf.org/other/cfr/) | 在线试用 |
 
-**支持格式**:
-- .class文件
-- .jar文件
+## 离线工具
 
-**特点**:
-- 多种反编译器
-- 在线处理
-- 无需安装
+### 反编译器
 
-## 离线反编译器
+#### JD-GUI
 
-### JAD
-**经典工具**: Java Decompiler
-
-**特点**:
-- 老牌反编译器
-- 命令行工具
-- 速度快
-
-### CFR
-**GitHub**: [https://github.com/leibnitz27/cfr](https://github.com/leibnitz27/cfr)
-
-**功能**: 现代Java反编译器
-
-**特点**:
-- 支持Java 8+特性
-- Lambda表达式
-- 命令行使用
-
-**用法**:
-```bash
-java -jar cfr.jar MyClass.class
-java -jar cfr.jar app.jar --outputdir output/
+**下载链接**:
+```
+https://github.com/java-decompiler/jd-gui/releases
 ```
 
-### Procyon
-**链接**: [https://github.com/mstrobel/procyon](https://github.com/mstrobel/procyon)
+**基本使用**:
+```bash
+# GUI启动
+java -jar jd-gui.jar
 
-**功能**: Java反编译器
+# 命令行
+jd-cli app.jar -od output/
+```
+
+#### CFR
+
+**下载链接**:
+```
+https://www.benf.org/other/cfr/
+```
+
+**使用**:
+```bash
+# 单个class文件
+java -jar cfr.jar MyClass.class
+
+# Jar文件
+java -jar cfr.jar app.jar --outputdir output/
+
+# 处理混淆
+java -jar cfr.jar obfuscated.jar --renamedupmembers true --removeboilerplate true
+```
+
+**特点**: 支持Java 14+、Lambda表达式、Switch表达式
+
+#### Procyon
+
+**下载链接**:
+```
+https://github.com/mstrobel/procyon/releases
+```
+
+**使用**:
+```bash
+java -jar procyon-decompiler.jar Example.class
+java -jar procyon-decompiler.jar -jar app.jar -o output/
+```
+
+#### Bytecode Viewer
+
+**下载链接**:
+```
+https://github.com/Konloch/bytecode-viewer/releases
+```
+
+**功能**: 集成多个反编译器的综合工具
 
 **特点**:
-- 支持现代Java特性
-- 良好的lambda支持
-- 活跃维护
-
-### JD-GUI
-**下载**: [http://java-decompiler.github.io/](http://java-decompiler.github.io/)
-
-**功能**: 图形化Java反编译器
-
-**特点**:
-- 图形界面
-- 目录树浏览
-- 跨平台
-
-## 综合工具
-
-### Bytecode Viewer
-**官网**: [https://bytecodeviewer.com/](https://bytecodeviewer.com/)
-
-**GitHub**: [https://github.com/Konloch/bytecode-viewer](https://github.com/Konloch/bytecode-viewer)
-
-**功能**: 开源轻量Java反编译工具
-
-**特点**:
-- 集成多个反编译器
+- 同时使用JD-GUI、CFR、Procyon等
 - 字节码查看
 - 支持JAR/APK/CLASS
-- 插件支持
-- 跨平台
+- 插件系统
+- 搜索功能
 
-### Jar Analyzer
-**GitHub**: [https://github.com/jar-analyzer/jar-analyzer](https://github.com/jar-analyzer/jar-analyzer)
+**使用**:
+```bash
+java -jar BytecodeViewer.jar
+```
 
-**功能**: Jar文件分析工具
+#### Jar Analyzer
+
+**下载链接**:
+```
+https://github.com/jar-analyzer/jar-analyzer
+```
+
+**功能**: Jar静态分析工具
 
 **特点**:
 - 依赖分析
+- 方法调用链
 - 字节码分析
-- 安全检查
+- Spring分析
 
-## 反编译GUI工具
+### Android逆向
 
-### JavaDecompileTool-GUI
-**GitHub**: [https://github.com/MountCloud/JavaDecompileTool-GUI](https://github.com/MountCloud/JavaDecompileTool-GUI)
+#### JADX
 
-**功能**: Java反编译GUI工具
-
-### CodeReviewTools
-**GitHub**: [https://github.com/Ppsoft1991/CodeReviewTools](https://github.com/Ppsoft1991/CodeReviewTools)
-
-**功能**: 代码审计工具
-
-**特点**:
-- 集成反编译
-- 代码审计
-- 漏洞检测
-
-## Android逆向
-
-### JADX
-**GitHub**: [https://github.com/skylot/jadx](https://github.com/skylot/jadx)
-
-**功能**: APK反编译神器
-
-**特点**:
-- DEX转Java源码
-- GUI界面
-- 搜索功能
-- 支持资源查看
-
-**用法**:
-```bash
-jadx app.apk
-jadx -d output classes.dex
+**下载链接**:
+```
+https://github.com/skylot/jadx/releases
 ```
 
-### APKTool
-**链接**: [https://ibotpeaches.github.io/Apktool/](https://ibotpeaches.github.io/Apktool/)
-
-**功能**: APK反编译和重打包
-
-**用法**:
-```bash
-apktool d app.apk                # 反编译
-apktool b app_folder -o new.apk  # 重打包
+**GUI使用**:
+```
+1. 启动jadx-gui
+2. 打开APK/DEX/JAR
+3. 自动反编译为Java代码
+4. File -> Save as gradle project
 ```
 
-### GDA (GJoy Dex Analyzer)
-**链接**: [http://www.gda.wiki:9090/](http://www.gda.wiki:9090/)
+**命令行**:
+```bash
+# 反编译APK
+jadx app.apk -d output/
 
-**功能**: Android应用分析工具
+# 不反混淆
+jadx app.apk --no-deobf
 
-**特点**:
+# 保留行号
+jadx app.apk --show-bad-code
+```
+
+#### APKTool
+
+**下载链接**:
+```
+https://ibotpeaches.github.io/Apktool/
+```
+
+**使用**:
+```bash
+# 反编译（得到smali代码）
+apktool d app.apk -o output/
+
+# 重新打包
+apktool b output/ -o new.apk
+
+# 查看资源
+apktool d -s app.apk  # 不反编译smali
+```
+
+#### dex2jar
+
+**下载链接**:
+```
+https://github.com/pxb1988/dex2jar
+```
+
+**使用**:
+```bash
+# DEX转JAR
+d2j-dex2jar app.apk
+d2j-dex2jar classes.dex
+
+# 然后用JD-GUI打开jar
+```
+
+#### GDA
+
+**下载链接**:
+```
+http://www.gda.wiki:9090/
+```
+
+**特点**: 
+- 中文界面
 - 静态分析
 - 动态调试
-- 中文界面
-- 专业级工具
+- 专业Android分析工具
 
-### GameSentry
-**GitHub**: [https://github.com/GrowthEase/GameSentry](https://github.com/GrowthEase/GameSentry)
+### 其他工具
 
-**功能**: Android游戏安全分析
+#### JavaDecompile-GUI
 
-## 代码混淆识别
+**下载链接**:
+```
+https://github.com/MountCloud/JavaDecompileTool-GUI
+```
+
+**功能**: 集成多个反编译器的GUI工具
+
+#### CodeReviewTools
+
+**下载链接**:
+```
+https://github.com/Ppsoft1991/CodeReviewTools
+```
+
+**功能**: Java代码审计工具
+
+## 混淆识别
 
 ### 常见混淆器
-- **ProGuard**: 最常见
-- **DexGuard**: ProGuard商业版
-- **Allatori**: 字符串加密
-- **Zelix KlassMaster**: 流程混淆
+
+| 混淆器 | 特征 | 强度 |
+|--------|------|------|
+| ProGuard | 类名变a/b/c | 中 |
+| DexGuard | ProGuard商业版 | 高 |
+| Allatori | 字符串加密 | 中高 |
+| Zelix KlassMaster | 控制流混淆 | 高 |
+| yGuard | 开源混淆 | 中 |
 
 ### 识别特征
+
 ```java
-// ProGuard混淆
+// ProGuard混淆后
 class a {
-    void a() { }
+    void a(String a) {
+        a.a();
+    }
 }
 
 // 字符串加密
-String s = decrypt("\x1a\x2b\x3c");
-```
+String s = decrypt("\x1a\x2b\x3c\x4d");
 
-## 解题流程
-
-### Jar文件分析
-1. **解压查看**: `unzip app.jar`
-2. **反编译**: 使用CFR或Procyon
-3. **查找入口**: Main-Class in MANIFEST.MF
-4. **分析逻辑**: 跟踪关键函数
-
-### APK分析
-1. **基本信息**: `aapt dump badging app.apk`
-2. **反编译**: `jadx app.apk`
-3. **查看资源**: assets/res目录
-4. **Native代码**: 提取.so文件分析
-
-### Class文件分析
-1. **反编译**: `java -jar cfr.jar MyClass.class`
-2. **字节码**: `javap -c MyClass.class`
-3. **动态调试**: 使用jdb或IDE调试
-
-## 常见题型
-
-### 字符串加密
-```java
-// 常见Base64
-String flag = new String(Base64.decode("..."));
-
-// 自定义加密
-char[] encrypted = {...};
-for(int i=0; i<encrypted.length; i++) {
-    encrypted[i] ^= key[i % key.length];
-}
-```
-
-### 算法逆向
-1. 理解加密算法
-2. 逆向推导或爆破
-3. Python重写验证
-
-### 反调试
-```java
-// 检测调试器
-if (ManagementFactory.getRuntimeMXBean()
-    .getInputArguments().toString().indexOf("jdwp") >= 0) {
-    System.exit(0);
+// 控制流平坦化
+switch(state) {
+    case 0: ...
+    case 1: ...
 }
 ```
 
 ## CTF解题技巧
 
 !!! tip "快速分析"
-    1. 使用JADX查看整体结构
-    2. 搜索"flag"、"password"等关键字
-    3. 找到加密解密函数
-    4. 提取算法用Python重写
+    ```
+    1. 确定入口点
+       - jar: MANIFEST.MF中的Main-Class
+       - apk: AndroidManifest.xml中的MainActivity
+    
+    2. 搜索关键字
+       - "flag" / "password" / "key"
+       - Base64编码的字符串
+       - 加密函数名
+    
+    3. 理解算法
+       - 定位加密/验证函数
+       - 提取算法逻辑
+       - Python重写验证
+    ```
+
+!!! tip "Jar文件分析"
+    ```bash
+    # 1. 解压查看
+    unzip app.jar -d extracted/
+    
+    # 2. 查看清单
+    cat META-INF/MANIFEST.MF
+    
+    # 3. 反编译
+    java -jar cfr.jar app.jar --outputdir src/
+    
+    # 4. 搜索字符串
+    grep -r "flag" src/
+    
+    # 5. 运行测试
+    java -jar app.jar
+    ```
+
+!!! tip "APK分析流程"
+    ```bash
+    # 1. 基本信息
+    aapt dump badging app.apk
+    
+    # 2. 反编译Java代码
+    jadx app.apk -d output/
+    
+    # 3. 反编译smali代码
+    apktool d app.apk -o smali_output/
+    
+    # 4. 查看资源
+    ls smali_output/res/
+    ls smali_output/assets/
+    
+    # 5. 提取native库
+    unzip app.apk "lib/*"
+    ```
 
 !!! tip "处理混淆"
-    1. 重命名有意义的变量
+    ```
+    1. 重命名变量
+       - 根据用途重命名类和方法
+       - N键在IDE中重命名
+    
     2. 理解控制流
-    3. 动态调试观察
-    4. 不要被混淆吓倒
+       - 画出流程图
+       - 识别真实逻辑
+    
+    3. 动态调试
+       - 在关键位置打断点
+       - 观察实际数据
+    
+    4. 字符串解密
+       - 找到解密函数
+       - 批量解密所有字符串
+    ```
+
+!!! tip "常见算法识别"
+    ```java
+    // Base64
+    Base64.getDecoder().decode(...)
+    Base64.getEncoder().encode(...)
+    
+    // AES
+    Cipher.getInstance("AES/...")
+    KeyGenerator.getInstance("AES")
+    
+    // MD5/SHA
+    MessageDigest.getInstance("MD5")
+    MessageDigest.getInstance("SHA-256")
+    
+    // RSA
+    Cipher.getInstance("RSA")
+    KeyPairGenerator.getInstance("RSA")
+    ```
 
 !!! warning "注意事项"
-    - 检查是否有native代码(.so文件)
-    - 注意资源文件中的隐藏信息
+    ```
+    - 检查native方法（需分析.so文件）
+    - 资源文件可能藏有关键信息
     - 某些混淆难以静态分析
-    - 可以修改代码后重新运行
+    - 可修改代码重新编译运行
+    - 注意反调试和完整性检查
+    ```
+
+!!! tip "工具选择"
+    ```
+    快速查看: JD-GUI
+    复杂代码: CFR
+    对比分析: Bytecode Viewer（多反编译器）
+    Android: JADX（Java代码）+ APKTool（smali）
+    深度分析: Bytecode Viewer + 动态调试
+    ```
+
+## 相关资源
+
+- **CFR**: 支持最新Java特性的反编译器
+- **JADX**: Android APK反编译首选
+- **Bytecode Viewer**: 集成多个反编译器，方便对比
+- **APKTool**: APK反编译和重打包标准工具

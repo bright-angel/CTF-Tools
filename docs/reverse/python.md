@@ -2,160 +2,379 @@
 
 Python程序的反编译和分析工具。
 
-## Pyc反编译
+## 在线工具
 
-### 在线工具
+### 在线Pyc反编译
 
-#### C5R Pyc反编译
-**链接**: [https://c5r.app/tools/pyc-decompiler](https://c5r.app/tools/pyc-decompiler)
+| 工具名称 | 链接 | 功能 |
+|---------|------|------|
+| C5R Pyc | [https://c5r.app/tools/pyc-decompiler](https://c5r.app/tools/pyc-decompiler) | 在线pyc反编译 |
+| CTFever Pyc | [https://ctfever.uniiem.com/tools/pyc-decompiler](https://ctfever.uniiem.com/tools/pyc-decompiler) | 在线pyc反编译 |
 
-**功能**: 在线pyc反编译
+## 离线工具
 
-#### CTFever Pyc反编译
-**链接**: [https://ctfever.uniiem.com/tools/pyc-decompiler](https://ctfever.uniiem.com/tools/pyc-decompiler)
+### Pyc反编译
 
-**功能**: 在线pyc反编译
+#### uncompyle6
 
-### 离线工具
-
-#### Uncompyle6
-**GitHub**: [https://github.com/rocky/python-uncompyle6](https://github.com/rocky/python-uncompyle6)
-
-**功能**: Python字节码反编译器
-
-**支持版本**: Python 1.5 - 3.8
-
-**安装**:
-```bash
+**下载链接**:
+```
 pip install uncompyle6
 ```
 
-**用法**:
+**基本使用**:
 ```bash
+# 反编译单个文件
 uncompyle6 file.pyc
+
+# 输出到文件
+uncompyle6 file.pyc > output.py
 uncompyle6 -o output.py file.pyc
+
+# 批量反编译
+uncompyle6 -o output_dir/ *.pyc
+
+# 指定Python版本
+uncompyle6 --py 3.8 file.pyc
 ```
 
-#### Pydumpck
-**GitHub**: [https://github.com/serfend/pydumpck](https://github.com/serfend/pydumpck)
+**支持版本**: Python 2.7, 3.0-3.8
 
-**功能**: 多版本pyc反编译
+#### pycdc
 
-**特点**:
-- 支持Python 2.x - 3.10
-- 批量反编译
+**下载链接**:
+```
+https://github.com/zrax/pycdc
+```
+
+**编译**:
+```bash
+git clone https://github.com/zrax/pycdc
+cd pycdc
+cmake .
+make
+
+# 使用
+./pycdc file.pyc        # 反编译
+./pycdas file.pyc       # 反汇编
+```
+
+**支持版本**: Python 1.5-3.11+
+
+#### decompyle3
+
+**下载链接**:
+```
+pip install decompyle3
+```
+
+**使用**:
+```bash
+decompyle3 file.pyc
+decompyle3 -o output.py file.pyc
+```
+
+**支持版本**: Python 3.7-3.8
+
+#### pydumpck
+
+**下载链接**:
+```
+https://github.com/serfend/pydumpck
+```
+
+**安装使用**:
+```bash
+pip install pydumpck
+
+# 自动识别版本反编译
+pydumpck file.pyc
+
+# 批量反编译
+pydumpck dir/
+```
+
+**特点**: 
+- 支持Python 2.x-3.10+
 - 自动识别版本
+- 批量处理
 
-## PyInstaller打包程序
+### PyInstaller提取
 
-### PyInstaller Extractor
-**GitHub**:
-- [extremecoders-re/pyinstxtractor](https://github.com/extremecoders-re/pyinstxtractor)
-- [pyinstxtractor/pyinstxtractor-ng](https://github.com/pyinstxtractor/pyinstxtractor-ng)
+#### pyinstxtractor
 
-**功能**: 提取PyInstaller打包的exe
+**下载链接**:
+```
+https://github.com/extremecoders-re/pyinstxtractor
+```
 
-**用法**:
+**使用**:
+```bash
+python pyinstxtractor.py program.exe
+
+# 提取后
+# 1. 找到主pyc文件（通常与exe同名）
+# 2. 补充文件头（magic number + 时间戳，共16字节）
+# 3. 用uncompyle6反编译
+```
+
+**pyinstxtractor-ng** (增强版):
+```
+https://github.com/pyinstxtractor/pyinstxtractor-ng
+```
+
+#### PyInstaller文件头修复
+
+**方法1: 从其他pyc复制**:
+```bash
+# 从提取的其他完整pyc文件复制前16字节
+dd if=complete.pyc of=header.bin bs=1 count=16
+cat header.bin main.pyc > fixed.pyc
+```
+
+**方法2: 手动添加**:
+```python
+import struct
+import time
+
+# Python 3.8的magic number
+magic = b'\x55\x0d\r\n'
+timestamp = struct.pack('I', int(time.time()))
+size = struct.pack('I', 0)
+
+with open('main.pyc_extracted', 'rb') as f:
+    code = f.read()
+
+with open('main.pyc', 'wb') as f:
+    f.write(magic + timestamp + size + code)
+```
+
+### Py2exe提取
+
+#### unpy2exe
+
+**下载链接**:
+```
+https://github.com/matiasb/unpy2exe
+```
+
+**使用**:
+```bash
+python unpy2exe.py program.exe
+```
+
+#### python-exe-unpacker
+
+**下载链接**:
+```
+https://github.com/countercept/python-exe-unpacker
+```
+
+**使用**:
 ```bash
 python pyinstxtractor.py program.exe
 ```
 
-**提取后**:
-1. 找到主pyc文件
-2. 使用uncompyle6反编译
+### GUI工具
 
-### Unpy2exe
-**GitHub**: [https://github.com/matiasb/unpy2exe](https://github.com/matiasb/unpy2exe)
+#### Easy Python Decompiler
 
-**功能**: 提取py2exe打包的程序
-
-## Py2exe反编译
-
-### Easy Python Decompiler
-**下载**: [SourceForge](https://sourceforge.net/projects/easypythondecompiler)
-
-**功能**: GUI反编译工具
+**下载链接**:
+```
+https://sourceforge.net/projects/easypythondecompiler/
+```
 
 **特点**:
-- 图形界面
+- Windows图形界面
 - 支持pyc/pyo/exe
-- Windows平台
+- 简单易用
 
-## Python隐写
+### Python字节码隐写
 
-### Stegosaurus
-**GitHub**: [https://github.com/AngelKitty/stegosaurus](https://github.com/AngelKitty/stegosaurus)
+#### Stegosaurus
 
-**功能**: Python字节码隐写
+**下载链接**:
+```
+https://github.com/AngelKitty/stegosaurus
+```
 
-**原理**: 在pyc文件中隐藏数据
+**功能**: 在pyc字节码中隐藏数据
 
-## 解题流程
+**使用**:
+```bash
+# 隐藏数据
+python stegosaurus.py -p file.pyc -s "secret data"
 
-### PyInstaller程序
-1. **识别**: 使用strings查看是否有PyInstaller特征
-2. **提取**: pyinstxtractor提取文件
-3. **找主文件**: 通常是与exe同名的pyc
-4. **补文件头**: 从其他pyc复制前16字节
-5. **反编译**: uncompyle6反编译
+# 提取数据
+python stegosaurus.py -x file.pyc
+```
 
-### 纯pyc文件
-1. **检查版本**: 文件头magic number
-2. **反编译**: 
-   - Python 2.x-3.8: uncompyle6
-   - Python 3.9+: pydumpck或decompyle3
+## Python版本识别
 
-### 混淆的Python代码
-1. **变量名混淆**: 无法恢复，手动分析
-2. **控制流混淆**: 静态分析或动态调试
-3. **常量加密**: 动态运行获取
+### Magic Number对照表
 
-## Magic Number对照
+| Magic Number | Python版本 | 十六进制 |
+|--------------|-----------|----------|
+| 3413 | Python 2.7 | 03F3 0D0A |
+| 3351 | Python 3.5 | 170D 0D0A |
+| 3379 | Python 3.6 | 330D 0D0A |
+| 3393 | Python 3.7 | 420D 0D0A |
+| 3413 | Python 3.8 | 550D 0D0A |
+| 3425 | Python 3.9 | 610D 0D0A |
+| 3439 | Python 3.10 | 6F0D 0D0A |
+| 3495 | Python 3.11 | A70D 0D0A |
 
-| Magic | Python版本 |
-|-------|-----------|
-| 03F3 0D0A | Python 2.7 |
-| 420D 0D0A | Python 3.6 |
-| 550D 0D0A | Python 3.7 |
-| 610D 0D0A | Python 3.8 |
-| 6F0D 0D0A | Python 3.9 |
+### 查看Magic Number
 
-## 常见问题
+```bash
+# Linux/Mac
+xxd file.pyc | head -1
 
-### 反编译失败
-1. 检查Python版本是否匹配
-2. 尝试不同反编译工具
-3. 手动阅读字节码（dis模块）
-
-### 文件头损坏
-从同版本Python获取正确的文件头（前16字节）
-
-### 动态调试
-```python
-# 使用pdb调试
-import pdb
-pdb.set_trace()
-
-# 或者直接运行观察行为
-python suspicious.pyc
+# Python
+python -c "import struct; print(hex(struct.unpack('H', open('file.pyc','rb').read(2))[0]))"
 ```
 
 ## CTF解题技巧
 
 !!! tip "快速识别"
     ```bash
+    # 查看文件类型
     file unknown.bin
+    
+    # 搜索Python特征
     strings unknown.exe | grep -i python
+    strings unknown.exe | grep -i "pyinstaller"
+    
+    # 使用binwalk
     binwalk unknown.exe
     ```
 
-!!! tip "版本确定"
-    - 查看文件头magic number
-    - 从错误信息判断
-    - 尝试不同版本Python运行
+!!! tip "PyInstaller提取流程"
+    ```
+    1. 提取文件
+       python pyinstxtractor.py program.exe
+    
+    2. 找主文件
+       通常是与exe同名的pyc（无.pyc扩展名）
+    
+    3. 修复文件头
+       - 从其他pyc复制前16字节
+       - 或根据Python版本手动添加
+    
+    4. 反编译
+       uncompyle6 fixed.pyc
+    
+    5. 如果失败
+       - 尝试pycdc
+       - 尝试decompyle3
+       - 手动阅读字节码
+    ```
 
-!!! warning "注意事项"
-    - 某些py2exe程序需要特定工具
-    - 混淆后的代码可读性差
-    - 动态调试可能更有效
-    - 保留原始文件避免损坏
+!!! tip "版本不匹配处理"
+    ```
+    错误: "Unknown magic number"
+    
+    解决:
+    1. 识别Python版本（magic number）
+    2. 使用对应版本的反编译器
+    3. Python 3.9+用pycdc或pydumpck
+    4. 尝试多个工具
+    ```
+
+!!! tip "混淆代码处理"
+    ```python
+    # 常见混淆
+    
+    # 1. 变量名混淆
+    # 无法自动恢复，手动分析
+    
+    # 2. 字符串编码
+    s = base64.b64decode('...')
+    s = ''.join(chr(x^key) for x in data)
+    
+    # 3. 动态exec
+    exec(compile(...))
+    exec(__import__('base64').b64decode('...'))
+    
+    # 处理方法：
+    # - 动态运行观察
+    # - Hook exec/eval
+    # - 打印中间结果
+    ```
+
+!!! tip "动态分析"
+    ```python
+    # 使用pdb调试
+    python -m pdb script.pyc
+    
+    # 或插入断点
+    import pdb; pdb.set_trace()
+    
+    # Hook内置函数
+    import builtins
+    _exec = builtins.exec
+    def my_exec(code):
+        print("Executing:", code)
+        return _exec(code)
+    builtins.exec = my_exec
+    ```
+
+!!! tip "字节码分析"
+    ```python
+    # 如果反编译失败，手动查看字节码
+    import dis
+    import marshal
+    
+    # 读取pyc
+    with open('file.pyc', 'rb') as f:
+        f.read(16)  # 跳过header
+        code = marshal.load(f)
+    
+    # 反汇编
+    dis.dis(code)
+    
+    # 查看常量
+    print(code.co_consts)
+    
+    # 查看变量名
+    print(code.co_names)
+    ```
+
+!!! warning "常见问题"
+    ```
+    1. 反编译失败
+       - 检查Python版本匹配
+       - 尝试不同工具
+       - 查看字节码
+    
+    2. 文件头损坏
+       - 从同版本获取正确header
+       - 使用pyinstxtractor提取的完整pyc
+    
+    3. PyArmor加密
+       - 商业加密，难以直接破解
+       - 尝试内存dump
+       - 动态分析
+    
+    4. 代码混淆严重
+       - 动态调试更有效
+       - Hook关键函数
+       - 打印中间结果
+    ```
+
+!!! tip "工具选择"
+    ```
+    Python 2.x-3.8: uncompyle6 (首选)
+    Python 3.9+: pycdc / pydumpck
+    PyInstaller: pyinstxtractor + uncompyle6
+    Py2exe: unpy2exe
+    批量处理: pydumpck
+    GUI工具: Easy Python Decompiler (Windows)
+    ```
+
+## 相关资源
+
+- **uncompyle6**: Python 2-3.8反编译标准工具
+- **pycdc**: 支持最新Python版本
+- **pyinstxtractor**: PyInstaller提取工具
+- **pydumpck**: 自动识别版本批量反编译
