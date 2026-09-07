@@ -69,6 +69,7 @@ nav:
       - 对称加密: crypto/symmetric.md
       - 非对称加密: crypto/asymmetric.md
       - 哈希函数: crypto/hash.md
+      - 高级密码学: crypto/advanced.md
       - 古典密码: crypto/classical.md
       - 趣味编码: crypto/special.md
   - Web工具:
@@ -87,6 +88,7 @@ nav:
       - 隐写分析: misc/stego.md
       - 文件分析: misc/file.md
       - 图片处理: misc/image.md
+      - 音频视频: misc/audio-video.md
       - 其他: misc/others.md
       - 综合工具: misc/comprehensive.md
   - 关于: about.md
