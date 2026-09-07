@@ -2,236 +2,540 @@
 
 将二进制文件或字节码还原为高级语言代码。
 
-## Java反编译
+## 在线工具
 
-### JD-GUI Online
-**链接**: [http://www.javadecompilers.com/](http://www.javadecompilers.com/)
+### Java反编译
 
-**功能**: 在线Java反编译
+| 工具名称 | 链接 | 特点 |
+|---------|------|------|
+| JD-GUI Online | [http://www.javadecompilers.com/](http://www.javadecompilers.com/) | 在线反编译.class/.jar |
+| CFR Online | [https://www.benf.org/other/cfr/](https://www.benf.org/other/cfr/) | 支持Java新特性、Lambda |
+| Procyon Online | 部分网站提供 | 支持Java 8+ |
 
-**支持格式**:
-- .class文件
-- .jar文件
+### Python反编译
 
-**特点**:
-- 无需安装
-- 快速反编译
-- 支持导出源码
+| 工具名称 | 链接 | 功能 |
+|---------|------|------|
+| Pylingual | [https://pylingual.io/](https://pylingual.io/) | .pyc在线反编译 |
 
-### CFR
-**链接**: [https://www.benf.org/other/cfr/](https://www.benf.org/other/cfr/)
+### .NET反编译
 
-**功能**: Java反编译器
+| 工具名称 | 链接 | 特点 |
+|---------|------|------|
+| SharpLab | [https://sharplab.io/](https://sharplab.io/) | C#在线反编译、查看IL |
 
-**特点**:
-- 支持Java新特性
-- Lambda表达式
-- 在线试用版本
+### Android反编译
 
-### Procyon
-**链接**: [https://github.com/mstrobel/procyon](https://github.com/mstrobel/procyon)
+| 工具名称 | 链接 | 功能 |
+|---------|------|------|
+| APK在线反编译 | [http://www.javadecompilers.com/apk](http://www.javadecompilers.com/apk) | APK在线反编译 |
 
-**功能**: Java反编译器
+### JavaScript工具
 
-**特点**:
-- 支持Java 8+
-- 处理复杂代码
-- 命令行工具
+| 工具名称 | 链接 | 功能 |
+|---------|------|------|
+| JS Beautifier | [https://beautifier.io/](https://beautifier.io/) | JavaScript格式化 |
+| JS Nice | [http://www.jsnice.org/](http://www.jsnice.org/) | AI反混淆、变量名预测 |
+| WASM反编译 | [https://webassembly.github.io/wabt/demo/wasm2wat/](https://webassembly.github.io/wabt/demo/wasm2wat/) | WebAssembly转WAT |
 
-## Python反编译
+## 离线工具
 
-### Python在线反编译
-**链接**: [https://pylingual.io/](https://pylingual.io/)
+### Java反编译
 
-**功能**: Python字节码反编译
+#### JD-GUI
 
-**支持**:
-- .pyc文件
-- .pyo文件
-
-### Uncompyle6
-**安装**: `pip install uncompyle6`
-
-**功能**: Python反编译工具
-
-**用法**:
-```bash
-uncompyle6 file.pyc
+**下载链接**:
+```
+https://github.com/java-decompiler/jd-gui/releases
 ```
 
-**支持版本**: Python 2.7 - 3.8
+**基本使用**:
+```bash
+# 启动GUI
+java -jar jd-gui.jar
 
-### PyInstaller Extractor
-**链接**: [https://github.com/extremecoders-re/pyinstxtractor](https://github.com/extremecoders-re/pyinstxtractor)
+# 打开.class或.jar文件
+File -> Open -> 选择文件
 
-**功能**: 提取PyInstaller打包的程序
+# 保存反编译结果
+File -> Save All Sources
+```
 
-**用法**:
+#### CFR
+
+**下载链接**:
+```
+https://www.benf.org/other/cfr/
+```
+
+**命令行使用**:
+```bash
+# 反编译单个class文件
+java -jar cfr.jar Example.class
+
+# 反编译jar文件
+java -jar cfr.jar app.jar --outputdir output/
+
+# 指定输出目录
+java -jar cfr.jar app.jar --outputpath output/decompiled.java
+
+# 处理混淆代码
+java -jar cfr.jar obfuscated.jar --renamedupmembers true
+```
+
+**特点**: 支持Java 14+新特性、Lambda、Switch表达式
+
+#### Procyon
+
+**下载链接**:
+```
+https://github.com/mstrobel/procyon
+```
+
+**使用**:
+```bash
+java -jar procyon-decompiler.jar Example.class
+
+# 反编译jar
+java -jar procyon-decompiler.jar -jar app.jar -o output/
+```
+
+### Python反编译
+
+#### uncompyle6
+
+**下载链接**:
+```bash
+pip install uncompyle6
+```
+
+**基本使用**:
+```bash
+# 反编译.pyc文件
+uncompyle6 file.pyc
+
+# 输出到文件
+uncompyle6 file.pyc > output.py
+
+# 反编译整个目录
+uncompyle6 -o output_dir/ input_dir/*.pyc
+
+# 指定Python版本
+uncompyle6 --py 3.8 file.pyc
+```
+
+**支持版本**: Python 2.7, 3.0-3.8
+
+#### pycdc
+
+**下载链接**:
+```
+https://github.com/zrax/pycdc
+```
+
+**编译安装**:
+```bash
+git clone https://github.com/zrax/pycdc
+cd pycdc
+cmake .
+make
+
+# 使用
+./pycdc file.pyc
+./pycdas file.pyc  # 反汇编
+```
+
+**支持版本**: Python 1.5-3.9+
+
+#### PyInstaller Extractor
+
+**下载链接**:
+```
+https://github.com/extremecoders-re/pyinstxtractor
+```
+
+**使用**:
 ```bash
 python pyinstxtractor.py program.exe
+
+# 提取后得到.pyc文件
+# 需要添加magic number和时间戳
+python -c "import marshal; exec(marshal.loads(open('file.pyc','rb').read()[16:]))"
+
+# 或使用uncompyle6继续反编译
+uncompyle6 extracted.pyc
 ```
 
-## .NET反编译
-
-### ILSpy Online
-**链接**: [https://sharplab.io/](https://sharplab.io/)
-
-**功能**: C#/.NET在线反编译
-
-**特点**:
-- 查看IL代码
-- 多种语言输出
-- 实时编译
-
-### dnSpy
-**链接**: [https://github.com/dnSpy/dnSpy](https://github.com/dnSpy/dnSpy)
-
-**功能**: .NET调试和反编译
-
-**特点**:
-- 反编译
-- 调试
-- 修改程序集
-- Windows工具
-
-### dotPeek
-**链接**: [https://www.jetbrains.com/decompiler/](https://www.jetbrains.com/decompiler/)
-
-**功能**: JetBrains出品的.NET反编译器
-
-**特点**:
-- 免费
-- 高质量反编译
-- 支持最新.NET
-
-## Android反编译
-
-### JADX
-**链接**: [https://github.com/skylot/jadx](https://github.com/skylot/jadx)
-
-**功能**: Android APK反编译
-
-**特点**:
-- DEX转Java
-- 支持APK、DEX、JAR
-- GUI和命令行
-
-**在线版**: [http://www.javadecompilers.com/apk](http://www.javadecompilers.com/apk)
-
-### APKTool
-**链接**: [https://ibotpeaches.github.io/Apktool/](https://ibotpeaches.github.io/Apktool/)
-
-**功能**: APK反编译和重打包
-
-**用法**:
+**PyArmor加密破解**:
 ```bash
-apktool d app.apk        # 反编译
-apktool b app -o new.apk # 重新打包
+# PyArmor是Python代码混淆加密工具
+# 破解需要分析运行时
+# 参考: https://github.com/dashingsoft/pyarmor
 ```
 
-### GDA (GJoy Dex Analyzer)
-**链接**: [http://www.gda.wiki:9090/](http://www.gda.wiki:9090/)
+### .NET反编译
 
-**功能**: Android应用分析工具
+#### dnSpy
 
-**特点**:
-- 静态分析
-- 动态调试
-- 中文界面
+**下载链接**:
+```
+https://github.com/dnSpy/dnSpy/releases
+```
 
-## Web反编译
+**功能**:
+```
+1. 打开.exe或.dll文件
+2. 查看IL代码和C#代码
+3. 设置断点调试
+4. 修改代码并保存
+5. 导出源码
+```
 
-### JavaScript Beautifier
-**链接**: [https://beautifier.io/](https://beautifier.io/)
+**快捷键**:
+```
+F5: 调试运行
+F9: 设置断点
+F10: 单步跳过
+F11: 单步进入
+Ctrl+Shift+K: 编辑类/方法
+```
 
-**功能**: JavaScript代码美化
+**修改程序集**:
+```
+1. 右键方法 -> Edit Method
+2. 修改代码
+3. Compile
+4. File -> Save Module
+```
 
-**特点**:
-- 格式化混淆代码
-- 提高可读性
+#### ILSpy
 
-### JS Nice
-**链接**: [http://www.jsnice.org/](http://www.jsnice.org/)
+**下载链接**:
+```
+https://github.com/icsharpcode/ILSpy/releases
+```
 
-**功能**: JavaScript反混淆
+**使用**:
+```
+1. 打开.exe/.dll
+2. 选择反编译语言（C#/VB/IL）
+3. 导出项目：File -> Save Code
+```
 
-**特点**:
-- AI驱动
-- 变量名预测
-- 类型推断
+#### dotPeek
 
-### WebAssembly反编译
-**链接**: [https://webassembly.github.io/wabt/demo/wasm2wat/](https://webassembly.github.io/wabt/demo/wasm2wat/)
+**下载链接**:
+```
+https://www.jetbrains.com/decompiler/
+```
 
-**功能**: WASM转WAT文本格式
+**特点**: JetBrains出品，免费，高质量反编译
 
-## 其他语言
+### Android反编译
 
-### Ghidra
-**链接**: [https://ghidra-sre.org/](https://ghidra-sre.org/)
+#### JADX
 
-**功能**: NSA开源的逆向工程框架
+**下载链接**:
+```
+https://github.com/skylot/jadx/releases
+```
 
-**特点**:
-- 反汇编
-- 反编译
-- 支持多种架构
-- 脚本自动化
+**GUI使用**:
+```
+1. 启动jadx-gui
+2. 打开APK/DEX/JAR文件
+3. 查看反编译后的Java代码
+4. File -> Save as gradle project
+```
 
-### IDA Pro
-**链接**: [https://hex-rays.com/ida-pro/](https://hex-rays.com/ida-pro/)
+**命令行使用**:
+```bash
+# 反编译APK
+jadx app.apk -d output/
 
-**功能**: 专业级反汇编器
+# 反编译DEX
+jadx classes.dex -d output/
 
-**特点**:
-- 业界标准
-- 强大的反汇编能力
-- 支持插件
-- 免费版(IDA Free)功能受限
+# 不反混淆
+jadx app.apk --no-deobf
 
-### Hopper
-**链接**: [https://www.hopperapp.com/](https://www.hopperapp.com/)
+# 保留行号
+jadx app.apk --show-bad-code
+```
 
-**功能**: macOS/Linux反汇编器
+#### APKTool
 
-**特点**:
-- 用户友好
-- 支持ARM/x86
-- 伪代码生成
+**下载链接**:
+```
+https://ibotpeaches.github.io/Apktool/
+```
 
-### Cutter
-**链接**: [https://cutter.re/](https://cutter.re/)
+**安装使用**:
+```bash
+# Windows
+下载apktool.bat和apktool.jar
 
-**功能**: 基于Rizin的逆向工程平台
+# Linux/Mac
+wget https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
+wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.x.x.jar
+mv apktool_2.x.x.jar apktool.jar
+chmod +x apktool apktool.jar
 
-**特点**:
-- 开源免费
-- 现代化界面
-- Ghidra反编译器集成
+# 反编译APK（得到smali代码）
+apktool d app.apk -o output/
+
+# 重新打包
+apktool b output/ -o new.apk
+
+# 签名（需要jarsigner）
+keytool -genkey -v -keystore my.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my.keystore new.apk alias_name
+```
+
+#### dex2jar
+
+**下载链接**:
+```
+https://github.com/pxb1988/dex2jar
+```
+
+**使用**:
+```bash
+# DEX转JAR
+d2j-dex2jar app.apk
+d2j-dex2jar classes.dex
+
+# 然后用JD-GUI打开jar文件
+```
+
+#### GDA
+
+**下载链接**:
+```
+http://www.gda.wiki:9090/
+```
+
+**特点**: 中文界面，静态分析+动态调试
+
+### 通用反编译工具
+
+#### Ghidra
+
+**下载链接**:
+```
+https://ghidra-sre.org/
+```
+
+**安装**:
+```bash
+# 需要JDK 11+
+# 下载解压后
+cd ghidra_10.x.x
+./ghidraRun  # Linux/Mac
+ghidraRun.bat  # Windows
+```
+
+**基本使用**:
+```
+1. File -> New Project
+2. File -> Import File（选择二进制文件）
+3. 双击文件分析
+4. 查看反汇编代码和反编译代码
+5. Window -> Decompile查看伪C代码
+```
+
+**脚本自动化**:
+```python
+# Ghidra Python脚本
+from ghidra.app.decompiler import DecompInterface
+
+# 获取当前函数
+func = getFunctionContaining(currentAddress)
+if func:
+    # 反编译
+    decompiler = DecompInterface()
+    decompiler.openProgram(currentProgram)
+    result = decompiler.decompileFunction(func, 30, monitor)
+    print(result.getDecompiledFunction().getC())
+```
+
+#### IDA Pro / IDA Free
+
+**下载链接**:
+```
+https://hex-rays.com/ida-free/
+```
+
+**IDA Free限制**:
+- 仅支持x86/x64
+- 无反编译器
+- 无团队协作功能
+
+**IDA Pro功能**:
+```
+F5: 反编译（需要Hex-Rays插件）
+G: 跳转到地址
+N: 重命名
+X: 交叉引用
+Space: 切换图形/文本视图
+```
+
+#### Cutter
+
+**下载链接**:
+```
+https://cutter.re/
+```
+
+**特点**: 基于Rizin，开源免费，集成Ghidra反编译器
+
+**使用**:
+```
+1. 打开二进制文件
+2. 自动分析
+3. 查看反汇编和反编译代码
+4. Graph视图查看控制流
+```
+
+#### Hopper
+
+**下载链接**:
+```
+https://www.hopperapp.com/
+```
+
+**平台**: macOS/Linux
+
+**特点**: 界面友好，支持ARM/x86/x64
 
 ## CTF解题技巧
 
-!!! tip "Java/Android"
-    - 检查混淆保护(ProGuard/DexGuard)
-    - 寻找硬编码密钥
-    - 注意native方法(.so文件)
-    - 动态调试验证逻辑
+!!! tip "Java/Android反编译"
+    ```
+    1. 反编译APK流程
+       - apktool d app.apk（获取资源和smali）
+       - jadx app.apk（获取Java代码）
+       - 查看AndroidManifest.xml
+    
+    2. 寻找关键信息
+       - 硬编码密钥/密码
+       - 算法逻辑
+       - native方法（需分析.so）
+       - 网络API端点
+    
+    3. 混淆识别
+       - ProGuard: 类名变成a/b/c
+       - DexGuard: 更强混淆
+       - 字符串加密
+    
+    4. 动态调试
+       - dnSpy直接调试.NET
+       - Android Studio调试smali
+       - Frida动态Hook
+    ```
 
-!!! tip "Python"
-    - .pyc文件注意版本匹配
-    - marshal模块序列化
-    - 可能存在反调试
-    - PyArmor等加密工具
+!!! tip "Python反编译"
+    ```
+    1. .pyc文件处理
+       - 检查Python版本（magic number）
+       - uncompyle6反编译
+       - 版本不匹配尝试pycdc
+    
+    2. PyInstaller程序
+       - pyinstxtractor提取
+       - 找到主.pyc文件
+       - 添加magic number
+       - uncompyle6反编译
+    
+    3. PyArmor加密
+       - 运行时解密
+       - 内存dump
+       - 动态分析
+    ```
 
-!!! tip ".NET"
-    - 检查混淆器(ConfuserEx等)
-    - 资源文件可能藏数据
-    - IL代码直接分析
-    - dnSpy可直接修改调试
+!!! tip ".NET反编译"
+    ```
+    1. dnSpy使用技巧
+       - 反编译查看逻辑
+       - 修改代码重新编译
+       - 调试运行观察
+       - 搜索字符串/方法
+    
+    2. 混淆处理
+       - ConfuserEx混淆
+       - de4dot去混淆工具
+       - 手动分析IL代码
+    
+    3. 资源文件
+       - 图片、配置可能藏flag
+       - 使用ResourceHacker提取
+    ```
+
+!!! tip "通用技巧"
+    ```
+    1. 字符串搜索
+       - 搜索"flag"/"password"/"key"
+       - Base64编码的字符串
+       - 硬编码的URL/IP
+    
+    2. 算法识别
+       - 加密算法特征（AES/RSA/DES）
+       - 哈希函数（MD5/SHA1/SHA256）
+       - 自定义加密逻辑
+    
+    3. 控制流分析
+       - 关键判断逻辑
+       - 输入验证
+       - 反调试检测
+    
+    4. 动态分析结合
+       - 静态分析找到关键函数
+       - 动态调试验证逻辑
+       - Hook关键函数
+    ```
 
 !!! warning "反编译局限"
-    - 变量名丢失
-    - 注释消失
-    - 代码结构可能不同
-    - 混淆后难以理解
-    - 部分逻辑可能错误
+    ```
+    - 变量名丢失（除非有调试信息）
+    - 注释全部消失
+    - 代码结构可能重组
+    - 混淆代码难以理解
+    - 部分逻辑可能不准确
+    - 优化可能导致代码差异
+    ```
+
+!!! tip "工具选择建议"
+    ```
+    Java:
+    - 快速查看: JD-GUI
+    - 复杂代码: CFR
+    - 命令行: Procyon
+    
+    Python:
+    - 标准: uncompyle6
+    - 新版本: pycdc
+    - PyInstaller: pyinstxtractor
+    
+    .NET:
+    - 调试修改: dnSpy
+    - 纯反编译: ILSpy/dotPeek
+    
+    Android:
+    - Java代码: JADX
+    - Smali代码: APKTool
+    - 综合分析: GDA
+    
+    通用:
+    - 开源首选: Ghidra
+    - 专业级: IDA Pro
+    - 轻量级: Cutter
+    ```
+
+## 相关资源
+
+- **Ghidra**: NSA开源，免费强大，支持多架构
+- **dnSpy**: .NET反编译调试神器，可直接修改
+- **JADX**: Android APK反编译首选
+- **uncompyle6**: Python反编译标准工具
+- **IDA Free**: 免费版IDA，适合学习
+- **Cutter**: 现代化开源逆向平台
